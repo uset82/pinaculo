@@ -73,34 +73,37 @@ export default function PinaculoLayout({ positions, values, backgroundSrc = '/pi
       <div className="relative aspect-[7/6] rounded-lg overflow-hidden border border-white/10" onClick={handleClick}>
         <img src={backgroundSrc} alt="Pináculo base" className="absolute inset-0 w-full h-full object-contain opacity-20 pointer-events-none" />
 
-        {keys.map((k) => {
-          const pos = localPositions[k]
-          const value = values[k]
-          if (!pos) return null
-          const variant = letterToVariant(k)
-          const text = Array.isArray(value) ? value.join(', ') : value ?? ''
-          return (
-            <div
-              key={k}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%` }}
-              aria-label={`Posición ${k}`}
-            >
-              {renderMode === 'numbers-only' ? (
-                <div className="flex items-center justify-center" aria-hidden>
-                  <span className="font-bold text-white/90 drop-shadow">{text as any}</span>
-                </div>
-              ) : (
-                <div className={`w-12 h-12 rounded-full border ${variantClasses[variant]} backdrop-blur-sm flex items-center justify-center`}> 
-                  <span className="font-bold">{text as any}</span>
-                </div>
-              )}
-              {editable && (
-                <div className="text-center text-xs text-white/80 mt-1 font-semibold">{k}</div>
-              )}
-            </div>
-          )
-        })}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {keys.map((k) => {
+            const pos = localPositions[k]
+            const value = values[k]
+            if (!pos) return null
+            const text = Array.isArray(value) ? value.join(', ') : (value ?? '')
+            const x = pos.x * 100
+            const y = pos.y * 100
+            if (renderMode === 'numbers-only') {
+              return (
+                <text key={k} x={`${x}%`} y={`${y}%`} textAnchor="middle" dominantBaseline="central" className="fill-white" aria-label={`Posición ${k}`}>
+                  <tspan className="font-bold">{String(text)}</tspan>
+                </text>
+              )
+            }
+            // Default: draw a subtle circle behind
+            return (
+              <g key={k} aria-label={`Posición ${k}`}>
+                <circle cx={`${x}%`} cy={`${y}%`} r="12" className="stroke-white/30 fill-white/10" />
+                <text x={`${x}%`} y={`${y}%`} textAnchor="middle" dominantBaseline="central" className="fill-white">
+                  <tspan className="font-bold">{String(text)}</tspan>
+                </text>
+                {editable && (
+                  <text x={`${x}%`} y={`calc(${y}% + 18px)`} textAnchor="middle" className="fill-white/80 text-xs">
+                    {k}
+                  </text>
+                )}
+              </g>
+            )
+          })}
+        </svg>
       </div>
       {editable && (
         <pre className="mt-3 text-xs text-white/70 bg-white/5 p-2 rounded border border-white/10 overflow-auto max-h-40">{JSON.stringify(localPositions, null, 2)}</pre>
