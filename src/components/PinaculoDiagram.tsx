@@ -204,59 +204,59 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
             {/* Full Connecting Lines - Exact from pinnacle.png */}
             <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-[-1]">
               {/* H to G/J */}
-              <line x1="50%" y1="30" x2="30%" y2="110" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="50%" y1="30" x2="70%" y2="110" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="50%" y1="30" x2="30%" y2="110" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="50%" y1="30" x2="70%" y2="110" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* G to E/I */}
-              <line x1="30%" y1="110" x2="20%" y2="190" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="30%" y1="110" x2="50%" y2="190" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="30%" y1="110" x2="20%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="30%" y1="110" x2="50%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* J to I/F */}
-              <line x1="70%" y1="110" x2="50%" y2="190" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="70%" y1="110" x2="80%" y2="190" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="70%" y1="110" x2="50%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="70%" y1="110" x2="80%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* E to A */}
-              <line x1="20%" y1="190" x2="15%" y2="270" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="20%" y1="190" x2="15%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* I to B */}
-              <line x1="50%" y1="190" x2="40%" y2="270" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="50%" y1="190" x2="40%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* F to C */}
-              <line x1="80%" y1="190" x2="60%" y2="270" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="80%" y1="190" x2="60%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* J to D diagonal */}
-              <line x1="70%" y1="110" x2="85%" y2="270" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="70%" y1="110" x2="85%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* Center diamond */}
-              <line x1="15%" y1="270" x2="40%" y2="270" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="60%" y2="270" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="85%" y2="270" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="15%" y1="270" x2="40%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="40%" y1="270" x2="60%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="60%" y1="270" x2="85%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* Center to lower K/O/L */}
-              <line x1="15%" y1="270" x2="25%" y2="350" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="25%" y2="350" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="50%" y2="350" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="50%" y2="350" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="75%" y2="350" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="85%" y1="270" x2="75%" y2="350" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="15%" y1="270" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="40%" y1="270" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="40%" y1="270" x2="50%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="60%" y1="270" x2="50%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="60%" y1="270" x2="75%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="85%" y1="270" x2="75%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* Lower to M */}
-              <line x1="25%" y1="350" x2="50%" y2="430" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="50%" y1="350" x2="50%" y2="430" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="75%" y1="350" x2="50%" y2="430" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="25%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="50%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="75%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* M to P/N */}
-              <line x1="50%" y1="430" x2="30%" y2="430" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="50%" y1="430" x2="70%" y2="430" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="50%" y1="430" x2="30%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="50%" y1="430" x2="70%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* P/N to Q/R/S */}
-              <line x1="30%" y1="430" x2="25%" y2="510" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="30%" y1="430" x2="50%" y2="510" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="70%" y1="430" x2="50%" y2="510" stroke="#3B82F6" strokeWidth="2" />
-              <line x1="70%" y1="430" x2="75%" y2="510" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="30%" y1="430" x2="25%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="30%" y1="430" x2="50%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="70%" y1="430" x2="50%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+              <line x1="70%" y1="430" x2="75%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
               
               {/* W connection to K */}
-              <line x1="5%" y1="350" x2="25%" y2="350" stroke="#3B82F6" strokeWidth="2" />
+              <line x1="5%" y1="350" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
             </svg>
           </div>
         </div>
@@ -369,7 +369,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       </div>
 
       {/* Main Diagram */}
-      <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+      <div className="p-6 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
         {renderDiagram()}
       </div>
 
