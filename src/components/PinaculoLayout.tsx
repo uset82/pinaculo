@@ -58,8 +58,8 @@ export default function PinaculoLayout({ positions, values, backgroundSrc = '/pi
     <div className="w-full max-w-[900px] mx-auto">
       {editable && (
         <div className="flex items-center gap-2 mb-2">
-          <label className="text-white/80 text-sm">Colocar:</label>
-          <select value={currentKey} onChange={(e) => setCurrentKey(e.target.value)} className="bg-white/10 text-white/90 text-sm rounded px-2 py-1 border border-white/20">
+          <label htmlFor="pinaculo-letter-select" className="text-white/80 text-sm">Colocar:</label>
+          <select id="pinaculo-letter-select" name="pinaculo-letter-select" value={currentKey} aria-label="Seleccionar letra a colocar" onChange={(e) => setCurrentKey(e.target.value)} className="bg-white/10 text-white/90 text-sm rounded px-2 py-1 border border-white/20">
             {['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','W','T','X','Y','Z'].map((k) => (
               <option value={k} key={k}>{k}</option>
             ))}
@@ -83,6 +83,7 @@ export default function PinaculoLayout({ positions, values, backgroundSrc = '/pi
               key={k}
               className="absolute"
               style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%`, transform: 'translate(-50%, -50%)' }}
+              aria-label={`Posición ${k}`}
             >
               <div className={`w-12 h-12 rounded-full border ${variantClasses[variant]} backdrop-blur-sm flex items-center justify-center`}> 
                 <span className="font-bold">{text as any}</span>
