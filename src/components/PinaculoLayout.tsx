@@ -82,8 +82,8 @@ export default function PinaculoLayout({ positions, values, backgroundSrc = '/pi
           return (
             <div
               key={k}
-              className="absolute"
-              style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%`, transform: 'translate(-50%, -50%)' }}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%` }}
               aria-label={`Posición ${k}`}
             >
               {renderMode === 'numbers-only' ? (
