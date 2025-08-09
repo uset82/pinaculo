@@ -16,6 +16,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
   const [calculations, setCalculations] = useState<PinaculoResults | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [bgSvgMarkup, setBgSvgMarkup] = useState<string | null>(null)
   const SHOW_DETAIL_PANELS = false
 
   useEffect(() => {
@@ -37,6 +38,30 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       setCalculations(calc)
     }
   }, [birthDay, birthMonth, birthYear, name])
+
+  // Load sanitized SVG background once
+  useEffect(() => {
+    let isMounted = true
+    fetch('/pinaculo_page_1.svg')
+      .then(r => r.text())
+      .then(text => {
+        if (!isMounted) return
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(text, 'image/svg+xml')
+        const svgEl = doc.documentElement
+        svgEl.querySelectorAll('[fill]').forEach(el => {
+          const fill = el.getAttribute('fill') || ''
+          if (fill.toLowerCase() !== 'none') el.parentNode?.removeChild(el)
+        })
+        svgEl.querySelectorAll('use').forEach(el => el.parentNode?.removeChild(el))
+        svgEl.setAttribute('width', '100%')
+        svgEl.setAttribute('height', '100%')
+        svgEl.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+        setBgSvgMarkup(svgEl.outerHTML)
+      })
+      .catch(() => {})
+    return () => { isMounted = false }
+  }, [])
 
   if (loading) {
     return (
@@ -113,12 +138,12 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
         {/* Main Pyramid Diagram - Exact pinnacle.png Layout */}
         <div className="flex-1 flex justify-center overflow-x-auto">
           <div className="relative min-w-max w-[700px] h-[600px]">
-            {/* PPT SVG backdrop */}
-            <img
-              src="/pinaculo_page_1.svg"
-              alt="Pináculo base"
-              className="absolute inset-0 w-full h-full object-contain opacity-15 pointer-events-none select-none"
-            />
+            {bgSvgMarkup && (
+              <div
+                className="absolute inset-0 opacity-20 pointer-events-none select-none"
+                dangerouslySetInnerHTML={{ __html: bgSvgMarkup }}
+              />
+            )}
             
             {/* TOP LEVEL - H (TU DESTINO) */}
             <div className="absolute top-[0px] left-1/2 -translate-x-1/2 transform">
