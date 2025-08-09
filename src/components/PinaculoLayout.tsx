@@ -10,6 +10,7 @@ type PinaculoLayoutProps = {
   values: Values
   backgroundSrc?: string
   editable?: boolean
+  renderMode?: 'default' | 'numbers-only'
 }
 
 const letterToVariant = (letter: string): 'base' | 'positive' | 'negative' | 'special' => {
@@ -27,7 +28,7 @@ const variantClasses: Record<'base' | 'positive' | 'negative' | 'special', strin
   special: 'bg-yellow-500/20 text-yellow-200 border-yellow-400/30',
 }
 
-export default function PinaculoLayout({ positions, values, backgroundSrc = '/pinaculo_page_1.svg', editable = false }: PinaculoLayoutProps) {
+export default function PinaculoLayout({ positions, values, backgroundSrc = '/pinaculo_page_1.svg', editable = false, renderMode = 'default' }: PinaculoLayoutProps) {
   const [currentKey, setCurrentKey] = useState<string>('A')
   const [localPositions, setLocalPositions] = useState<Positions>(positions)
 
@@ -85,10 +86,18 @@ export default function PinaculoLayout({ positions, values, backgroundSrc = '/pi
               style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%`, transform: 'translate(-50%, -50%)' }}
               aria-label={`Posición ${k}`}
             >
-              <div className={`w-12 h-12 rounded-full border ${variantClasses[variant]} backdrop-blur-sm flex items-center justify-center`}> 
-                <span className="font-bold">{text as any}</span>
-              </div>
-              <div className="text-center text-xs text-white/80 mt-1 font-semibold">{k}</div>
+              {renderMode === 'numbers-only' ? (
+                <div className="flex items-center justify-center" aria-hidden>
+                  <span className="font-bold text-white/90 drop-shadow">{text as any}</span>
+                </div>
+              ) : (
+                <div className={`w-12 h-12 rounded-full border ${variantClasses[variant]} backdrop-blur-sm flex items-center justify-center`}> 
+                  <span className="font-bold">{text as any}</span>
+                </div>
+              )}
+              {editable && (
+                <div className="text-center text-xs text-white/80 mt-1 font-semibold">{k}</div>
+              )}
             </div>
           )
         })}

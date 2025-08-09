@@ -135,160 +135,50 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
 
     return (
       <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
-        {/* Main Pyramid Diagram - Exact pinnacle.png Layout */}
+        {/* Main Diagram using the principal SVG layout only with numbers */}
         <div className="flex-1 flex justify-center overflow-x-auto">
           <div className="relative min-w-max w-[700px] h-[600px]">
             {bgSvgMarkup && (
               <div
-                className="absolute inset-0 opacity-20 pointer-events-none select-none"
+                className="absolute inset-0 opacity-25 pointer-events-none select-none"
                 dangerouslySetInnerHTML={{ __html: bgSvgMarkup }}
               />
             )}
-            
-            {/* TOP LEVEL - H (TU DESTINO) */}
-            <div className="absolute top-[0px] left-1/2 -translate-x-1/2 transform">
-              <NumberCircle number={calculations.H} letter="H" variant="positive" />
-            </div>
-
-            {/* SECOND LEVEL - G and J */}
-            <div className="absolute top-[80px] left-[50%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.G} letter="G" variant="positive" />
-            </div>
-            <div className="absolute top-[80px] left-[80%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.J} letter="J" variant="positive" />
-            </div>
-
-            {/* THIRD LEVEL - E, I, F */}
-            <div className="absolute top-[160px] left-[25%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.E} letter="E" variant="positive" />
-            </div>
-            <div className="absolute top-[160px] left-1/2 -translate-x-1/2 transform">
-              <NumberCircle number={calculations.I} letter="I" variant="positive" />
-            </div>
-            <div className="absolute top-[160px] left-[75%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.F} letter="F" variant="positive" />
-            </div>
-
-            {/* CENTER DIAMOND - A, B, C, D */}
-            <div className="absolute top-[240px] left-[15%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.A} letter="A" variant="base" />
-            </div>
-            <div className="absolute top-[240px] left-[40%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.B} letter="B" variant="base" size="w-20 h-20" emphasize />
-            </div>
-            <div className="absolute top-[240px] left-[60%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.C} letter="C" variant="base" />
-            </div>
-            <div className="absolute top-[240px] left-[85%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.D} letter="D" variant="base" />
-            </div>
-
-            {/* LOWER LEVEL 1 - K, O, L */}
-            <div className="absolute top-[320px] left-[25%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.K} letter="K" variant="negative" />
-            </div>
-            <div className="absolute top-[320px] left-1/2 -translate-x-1/2 transform">
-              <NumberCircle number={calculations.O} letter="O" variant="negative" />
-            </div>
-            <div className="absolute top-[320px] left-[75%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.L} letter="L" variant="negative" />
-            </div>
-
-            {/* LOWER LEVEL 2 - M */}
-            <div className="absolute top-[400px] left-1/2 -translate-x-1/2 transform">
-              <NumberCircle number={calculations.M} letter="M" variant="negative" />
-            </div>
-
-            {/* W (TRIPLICIDAD) - LEFT SIDE */}
+            {/* Render only numbers positioned above the SVG layout */}
+            {/* H */}
+            <div className="absolute top-[0px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.H}</div>
+            {/* G */}
+            <div className="absolute top-[80px] left-[50%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.G}</div>
+            {/* J */}
+            <div className="absolute top-[80px] left-[80%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.J}</div>
+            {/* E I F */}
+            <div className="absolute top-[160px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.E}</div>
+            <div className="absolute top-[160px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.I}</div>
+            <div className="absolute top-[160px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.F}</div>
+            {/* A B C D */}
+            <div className="absolute top-[240px] left-[15%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.A}</div>
+            <div className="absolute top-[240px] left-[40%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.B}</div>
+            <div className="absolute top-[240px] left-[60%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.C}</div>
+            <div className="absolute top-[240px] left-[85%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.D}</div>
+            {/* K O L */}
+            <div className="absolute top-[320px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.K}</div>
+            <div className="absolute top-[320px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.O}</div>
+            <div className="absolute top-[320px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.L}</div>
+            {/* M */}
+            <div className="absolute top-[400px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.M}</div>
+            {/* P N */}
+            <div className="absolute top-[400px] left-[30%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.P}</div>
+            <div className="absolute top-[400px] left-[70%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.N}</div>
+            {/* Q R S */}
+            <div className="absolute top-[480px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.Q}</div>
+            <div className="absolute top-[480px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.R}</div>
+            <div className="absolute top-[480px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.S}</div>
+            {/* W */}
             {((Array.isArray(W) && W.length > 0) || (!Array.isArray(W) && W !== 0)) && (
-              <div className="absolute top-[320px] left-[5%] -translate-x-1/2 transform">
-                <div className="relative flex flex-col items-center">
-                  <div className={`min-w-12 h-12 rounded-full border bg-rose-200 border-rose-300 flex items-center justify-center px-2`}>
-                    <span className="font-extrabold text-rose-900 text-xl">
-                      {Array.isArray(W) ? W.join(', ') : W}
-                    </span>
-                  </div>
-                  <div className="text-sm font-bold mt-1 text-gray-800">W</div>
-                </div>
+              <div className="absolute top-[320px] left-[5%] -translate-x-1/2 transform text-white/90 font-bold">
+                {Array.isArray(W) ? W.join(', ') : W}
               </div>
             )}
-
-            {/* LOWER LEVEL 3 - P, N */}
-            <div className="absolute top-[400px] left-[30%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.P} letter="P" variant="negative" />
-            </div>
-            <div className="absolute top-[400px] left-[70%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.N} letter="N" variant="negative" />
-            </div>
-
-            {/* BOTTOM LEVEL - Q, R, S */}
-            <div className="absolute top-[480px] left-[25%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.Q} letter="Q" variant="negative" />
-            </div>
-            <div className="absolute top-[480px] left-1/2 -translate-x-1/2 transform">
-              <NumberCircle number={calculations.R} letter="R" variant="negative" />
-            </div>
-            <div className="absolute top-[480px] left-[75%] -translate-x-1/2 transform">
-              <NumberCircle number={calculations.S} letter="S" variant="negative" />
-            </div>
-
-            {/* Full Connecting Lines - Exact from pinnacle.png */}
-            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-[-1]">
-              {/* H to G/J */}
-              <line x1="50%" y1="30" x2="30%" y2="110" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="50%" y1="30" x2="70%" y2="110" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* G to E/I */}
-              <line x1="30%" y1="110" x2="20%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="30%" y1="110" x2="50%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* J to I/F */}
-              <line x1="70%" y1="110" x2="50%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="70%" y1="110" x2="80%" y2="190" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* E to A */}
-              <line x1="20%" y1="190" x2="15%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* I to B */}
-              <line x1="50%" y1="190" x2="40%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* F to C */}
-              <line x1="80%" y1="190" x2="60%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* J to D diagonal */}
-              <line x1="70%" y1="110" x2="85%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* Center diamond */}
-              <line x1="15%" y1="270" x2="40%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="60%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="85%" y2="270" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* Center to lower K/O/L */}
-              <line x1="15%" y1="270" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="40%" y1="270" x2="50%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="50%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="60%" y1="270" x2="75%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="85%" y1="270" x2="75%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* Lower to M */}
-              <line x1="25%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="50%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="75%" y1="350" x2="50%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* M to P/N */}
-              <line x1="50%" y1="430" x2="30%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="50%" y1="430" x2="70%" y2="430" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* P/N to Q/R/S */}
-              <line x1="30%" y1="430" x2="25%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="30%" y1="430" x2="50%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="70%" y1="430" x2="50%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              <line x1="70%" y1="430" x2="75%" y2="510" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-              
-              {/* W connection to K */}
-              <line x1="5%" y1="350" x2="25%" y2="350" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-            </svg>
           </div>
         </div>
 
