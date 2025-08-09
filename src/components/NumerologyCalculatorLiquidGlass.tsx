@@ -68,6 +68,60 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
   const [error, setError] = useState<string | null>(null)
   const isClient = useClientOnly()
 
+  const getNegativeAccentClasses = (key: string): string => {
+    switch (key) {
+      case 'K':
+        return 'bg-yellow-500/20 text-yellow-300'
+      case 'L':
+        return 'bg-blue-500/20 text-blue-300'
+      case 'M':
+        return 'bg-green-500/20 text-green-300'
+      case 'N':
+        return 'bg-purple-500/20 text-purple-300'
+      case 'O':
+        return 'bg-rose-500/20 text-rose-300'
+      case 'P':
+        return 'bg-indigo-500/20 text-indigo-300'
+      case 'Q':
+        return 'bg-lime-500/20 text-lime-300'
+      case 'R':
+        return 'bg-cyan-500/20 text-cyan-300'
+      case 'S':
+        return 'bg-orange-500/20 text-orange-300'
+      case 'W':
+        return 'bg-teal-500/20 text-teal-300'
+      case 'T':
+        return 'bg-slate-500/20 text-slate-300'
+      default:
+        return 'bg-white/10 text-white/90'
+    }
+  }
+
+  const getPositiveAccentClasses = (key: string): string => {
+    switch (key) {
+      case 'E':
+        return 'bg-yellow-500/20 text-yellow-300'
+      case 'F':
+        return 'bg-blue-500/20 text-blue-300'
+      case 'G':
+        return 'bg-green-500/20 text-green-300'
+      case 'H':
+        return 'bg-purple-500/20 text-purple-300'
+      case 'I':
+        return 'bg-cyan-500/20 text-cyan-300'
+      case 'J':
+        return 'bg-indigo-500/20 text-indigo-300'
+      case 'X':
+        return 'bg-rose-500/20 text-rose-300'
+      case 'Y':
+        return 'bg-amber-500/20 text-amber-300'
+      case 'Z':
+        return 'bg-orange-500/20 text-orange-300'
+      default:
+        return 'bg-white/10 text-white/90'
+    }
+  }
+
   // Preview mode data
   const previewData = {
     name: 'Carlos Carpio',
@@ -416,77 +470,77 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">K - ADOLESCENCIA</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.K}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('K')}`}>{result.negativeNumbers.K}</span>
                   </div>
                 </div>
                 {/* L */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">L - JUVENTUD</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.L}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('L')}`}>{result.negativeNumbers.L}</span>
                   </div>
                 </div>
                 {/* M */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">M - ADULTEZ</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.M}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('M')}`}>{result.negativeNumbers.M}</span>
                   </div>
                 </div>
                 {/* N */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">N - ADULTO MAYOR</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.N}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('N')}`}>{result.negativeNumbers.N}</span>
                   </div>
                 </div>
                 {/* O */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">O - INCONSCIENTE NEGATIVO</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.O}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('O')}`}>{result.negativeNumbers.O}</span>
                   </div>
                 </div>
                 {/* P */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">P - MI SOMBRA</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.P}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('P')}`}>{result.negativeNumbers.P}</span>
                   </div>
                 </div>
                 {/* Q */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">Q - SER INFERIOR 1</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.Q}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('Q')}`}>{result.negativeNumbers.Q}</span>
                   </div>
                 </div>
                 {/* R */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">R - SER INFERIOR 2</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.R}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('R')}`}>{result.negativeNumbers.R}</span>
                   </div>
                 </div>
                 {/* S */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">S - SER INFERIOR 3</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.S}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('S')}`}>{result.negativeNumbers.S}</span>
                   </div>
                 </div>
                 {/* W */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">W - TRIPLICIDAD</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('W')}`}>{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
                   </div>
                 </div>
                 {/* T */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">T - NÚMEROS AUSENTES</h4>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('T')}`}>
                       {Array.isArray(result.T) ? result.T.join(', ') : (result.T ?? '—')}
                     </span>
                   </div>
@@ -574,34 +628,44 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
             </div>
             <div className="space-y-3">
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                <h4 className="font-bold text-white/90 text-sm mb-1">I. Subconsciente</h4>
-                <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.positiveNumbers.I}</span>
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-white/90 text-sm">I. Subconsciente</h4>
+                  <span className={`px-2 py-0.5 rounded text-sm font-bold ${getPositiveAccentClasses('I')}`}>{result.positiveNumbers.I}</span>
+                </div>
               </div>
               
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                <h4 className="font-bold text-white/90 text-sm mb-1">J. Inconsciente</h4>
-                <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.positiveNumbers.J}</span>
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-white/90 text-sm">J. Inconsciente</h4>
+                  <span className={`px-2 py-0.5 rounded text-sm font-bold ${getPositiveAccentClasses('J')}`}>{result.positiveNumbers.J}</span>
+                </div>
               </div>
               
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                <h4 className="font-bold text-white/90 text-sm mb-1">P. Sombra</h4>
-                <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.P}</span>
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-white/90 text-sm">P. Sombra</h4>
+                  <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('P')}`}>{result.negativeNumbers.P}</span>
+                </div>
               </div>
               
               {/* Agregar otros aspectos si están disponibles */}
               {result.W && (
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">W. Triplicidad</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">W. Triplicidad</h4>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('W')}`}>{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
+                  </div>
                 </div>
               )}
               
               {result.T && (
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">T. Números Ausentes</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">
-                    {Array.isArray(result.T) ? result.T.join(', ') : result.T || 'Ninguno'}
-                  </span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">T. Números Ausentes</h4>
+                    <span className={`px-2 py-0.5 rounded text-sm font-bold ${getNegativeAccentClasses('T')}`}>
+                      {Array.isArray(result.T) ? result.T.join(', ') : result.T || 'Ninguno'}
+                    </span>
+                  </div>
                 </div>
               )}
             </div>
