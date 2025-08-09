@@ -113,6 +113,12 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
         {/* Main Pyramid Diagram - Exact pinnacle.png Layout */}
         <div className="flex-1 flex justify-center overflow-x-auto">
           <div className="relative min-w-max w-[700px] h-[600px]">
+            {/* PPT SVG backdrop */}
+            <img
+              src="/pinaculo_page_1.svg"
+              alt="Pináculo base"
+              className="absolute inset-0 w-full h-full object-contain opacity-15 pointer-events-none select-none"
+            />
             
             {/* TOP LEVEL - H (TU DESTINO) */}
             <div className="absolute top-[0px] left-1/2 -translate-x-1/2 transform">
