@@ -1,11 +1,12 @@
-[build]
-  command = "npm ci --prefix MCP && npm run build --prefix MCP"
-  publish = "MCP/out"
+ [build]
+   # Build from repository root using the Netlify Next.js Runtime plugin
+   command = "npm ci && npm run build"
+  # With Next.js static export (output: 'export'), artifacts go to 'out'
+  publish = "out"
 
-[build.environment]
-  NODE_VERSION = "18"
+ [build.environment]
+   # Use Node 20 (includes npm 10)
+   NODE_VERSION = "20"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+ # Note: No publish directory is set here. The Next.js plugin manages output.
+ # Also, do not define a catch-all redirect to index.html when using Next.js plugin.
