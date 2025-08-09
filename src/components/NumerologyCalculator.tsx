@@ -259,7 +259,6 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                     <div key={key} className="bg-green-50 p-4 rounded-lg border border-green-200">
                       <h3 className="font-bold text-green-900 text-sm">{key} - {labels[key]}</h3>
                       <div className="inline-block text-2xl font-extrabold text-emerald-700 bg-white/95 px-2 py-1 rounded shadow-sm">{String(value)}</div>
-                      <p className="inline-block mt-1 text-xs font-bold text-black bg-white/95 px-1.5 py-0.5 rounded shadow-sm">Descripción del talento</p>
                     </div>
                   )
                 })}

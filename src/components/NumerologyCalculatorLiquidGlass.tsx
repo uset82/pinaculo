@@ -312,7 +312,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">E - IMPLANTACIÓN DEL PROGRAMA</h4>
                     <span className="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-300 text-sm font-bold">{result.positiveNumbers.E}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.E?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.E && (
+                    <p className="text-white/70 text-xs">{result.interpretations.E.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* F */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -320,7 +322,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">F - ENCUENTRO CON TU MAESTRO</h4>
                     <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-sm font-bold">{result.positiveNumbers.F}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.F?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.F && (
+                    <p className="text-white/70 text-xs">{result.interpretations.F.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* G */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -328,7 +332,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">G - RE-IDENTIFICACIÓN CON TU YO</h4>
                     <span className="px-2 py-0.5 rounded bg-green-500/20 text-green-300 text-sm font-bold">{result.positiveNumbers.G}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.G?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.G && (
+                    <p className="text-white/70 text-xs">{result.interpretations.G.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* H */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -336,7 +342,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">H - TU DESTINO</h4>
                     <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-sm font-bold">{result.positiveNumbers.H}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.H?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.H && (
+                    <p className="text-white/70 text-xs">{result.interpretations.H.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* I */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -344,7 +352,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">I - INCONSCIENTE</h4>
                     <span className="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-sm font-bold">{result.positiveNumbers.I}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.I?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.I && (
+                    <p className="text-white/70 text-xs">{result.interpretations.I.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* J */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -352,7 +362,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">J - MI ESPEJO</h4>
                     <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-sm font-bold">{result.positiveNumbers.J}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.J?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.J && (
+                    <p className="text-white/70 text-xs">{result.interpretations.J.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* X */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -360,7 +372,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">X - REACCIÓN</h4>
                     <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-sm font-bold">{result.positiveNumbers.X}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.X?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.X && (
+                    <p className="text-white/70 text-xs">{result.interpretations.X.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* Y */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -368,7 +382,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">Y - MISIÓN</h4>
                     <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-sm font-bold">{result.positiveNumbers.Y}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.Y?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.Y && (
+                    <p className="text-white/70 text-xs">{result.interpretations.Y.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
                 {/* Z */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
@@ -376,7 +392,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     <h4 className="font-bold text-white/90 text-sm">Z - REGALO DIVINO</h4>
                     <span className="px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 text-sm font-bold">{result.positiveNumbers.Z}</span>
                   </div>
-                  <p className="text-white/70 text-xs">{result.interpretations?.Z?.split(': ').slice(1).join(': ') || 'Descripción del talento'}</p>
+                  {result.interpretations?.Z && (
+                    <p className="text-white/70 text-xs">{result.interpretations.Z.split(': ').slice(1).join(': ')}</p>
+                  )}
                 </div>
               </div>
             </div>
