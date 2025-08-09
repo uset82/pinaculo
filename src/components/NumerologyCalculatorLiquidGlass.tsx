@@ -414,60 +414,82 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {/* K */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">K - ADOLESCENCIA</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.K}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">K - ADOLESCENCIA</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.K}</span>
+                  </div>
                 </div>
                 {/* L */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">L - JUVENTUD</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.L}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">L - JUVENTUD</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.L}</span>
+                  </div>
                 </div>
                 {/* M */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">M - ADULTEZ</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.M}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">M - ADULTEZ</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.M}</span>
+                  </div>
                 </div>
                 {/* N */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">N - ADULTO MAYOR</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.N}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">N - ADULTO MAYOR</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.N}</span>
+                  </div>
                 </div>
                 {/* O */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">O - INCONSCIENTE NEGATIVO</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.O}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">O - INCONSCIENTE NEGATIVO</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.O}</span>
+                  </div>
                 </div>
                 {/* P */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">P - MI SOMBRA</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.P}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">P - MI SOMBRA</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.P}</span>
+                  </div>
                 </div>
                 {/* Q */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">Q - SER INFERIOR 1</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.Q}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">Q - SER INFERIOR 1</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.Q}</span>
+                  </div>
                 </div>
                 {/* R */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">R - SER INFERIOR 2</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.R}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">R - SER INFERIOR 2</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.R}</span>
+                  </div>
                 </div>
                 {/* S */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">S - SER INFERIOR 3</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.S}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">S - SER INFERIOR 3</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{result.negativeNumbers.S}</span>
+                  </div>
                 </div>
                 {/* W */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">W - TRIPLICIDAD</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">W - TRIPLICIDAD</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">{Array.isArray(result.W) ? result.W.join(', ') : result.W}</span>
+                  </div>
                 </div>
                 {/* T */}
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-                  <h4 className="font-bold text-white/90 text-sm mb-1">T - NÚMEROS AUSENTES</h4>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">
-                    {Array.isArray(result.T) ? result.T.join(', ') : (result.T ?? '—')}
-                  </span>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-bold text-white/90 text-sm">T - NÚMEROS AUSENTES</h4>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-white/90 text-sm font-bold">
+                      {Array.isArray(result.T) ? result.T.join(', ') : (result.T ?? '—')}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
