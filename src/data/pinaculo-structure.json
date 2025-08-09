@@ -1,0 +1,287 @@
+{
+  "pinaculoStructure": {
+    "description": "Sistema del Pináculo - Estructura completa de posiciones y cálculos",
+    "version": "1.0",
+    "positions": {
+      "A": {
+        "name": "MI ALMA",
+        "position": "base-left",
+        "formula": "MES de nacimiento reducido",
+        "color": "purple",
+        "description": "Tus deseos más profundos",
+        "category": "base"
+      },
+      "B": {
+        "name": "MI EXPRESIÓN",
+        "position": "base-center",
+        "formula": "DÍA de nacimiento reducido", 
+        "color": "purple",
+        "description": "Cómo te ven otros",
+        "category": "base"
+      },
+      "C": {
+        "name": "PODER DEL NOMBRE",
+        "position": "base-right",
+        "formula": "AÑO de nacimiento reducido",
+        "color": "purple",
+        "description": "Energía de tu nombre",
+        "category": "base"
+      },
+      "D": {
+        "name": "REGALO DIVINO",
+        "position": "base-far-right",
+        "formula": "A + B + C",
+        "color": "purple",
+        "description": "Don espiritual especial",
+        "category": "base"
+      },
+      "E": {
+        "name": "CICLO ADOLESCENCIA",
+        "position": "middle-left",
+        "formula": "A + B",
+        "color": "green",
+        "description": "Energía de juventud",
+        "category": "ciclos"
+      },
+      "F": {
+        "name": "CICLO ADULTEZ",
+        "position": "middle-right",
+        "formula": "B + C",
+        "color": "green",
+        "description": "Energía de madurez",
+        "category": "ciclos"
+      },
+      "G": {
+        "name": "CICLO JUVENTUD",
+        "position": "upper-left",
+        "formula": "E + F",
+        "color": "green",
+        "description": "Energía de crecimiento",
+        "category": "ciclos"
+      },
+      "H": {
+        "name": "MI MISIÓN",
+        "position": "top",
+        "formula": "G + I",
+        "color": "green",
+        "description": "Tu propósito de vida",
+        "category": "superior"
+      },
+      "I": {
+        "name": "CICLO ADULTO MAYOR",
+        "position": "upper-center",
+        "formula": "C + D",
+        "color": "green",
+        "description": "Energía de sabiduría",
+        "category": "ciclos"
+      },
+      "J": {
+        "name": "MI DESTINO",
+        "position": "upper-right",
+        "formula": "H + I",
+        "color": "green",
+        "description": "Tu camino destinado",
+        "category": "superior"
+      },
+      "K": {
+        "name": "NÚMERO DE SOMBRA",
+        "position": "lower-left",
+        "formula": "A - B (si negativo: 10 + resultado)",
+        "color": "red",
+        "description": "Aspectos a trabajar",
+        "category": "negativos"
+      },
+      "L": {
+        "name": "SER INFERIOR CONSCIENTE",
+        "position": "lower-right",
+        "formula": "B - C (si negativo: 10 + resultado)",
+        "color": "red",
+        "description": "Limitaciones conocidas",
+        "category": "negativos"
+      },
+      "M": {
+        "name": "SER INFERIOR HEREDADO",
+        "position": "lower-center",
+        "formula": "K + L",
+        "color": "red",
+        "description": "Patrones familiares",
+        "category": "negativos"
+      },
+      "N": {
+        "name": "SER INFERIOR LATENTE",
+        "position": "bottom-left",
+        "formula": "E - F (si negativo: 10 + resultado)",
+        "color": "red",
+        "description": "Limitaciones ocultas",
+        "category": "negativos"
+      },
+      "O": {
+        "name": "NÚMERO INCONSCIENTE NEGATIVO",
+        "position": "bottom-center",
+        "formula": "M + N",
+        "color": "red",
+        "description": "Resistencias internas",
+        "category": "negativos"
+      },
+      "P": {
+        "name": "NÚMERO DE KARMA",
+        "position": "bottom-left-isolated",
+        "formula": "G - I (si negativo: 10 + resultado)",
+        "color": "red",
+        "description": "Mi tarea pendiente",
+        "category": "negativos"
+      },
+      "Q": {
+        "name": "SER INFERIOR HEREDADO POR FAMILIA",
+        "position": "bottom-far-left",
+        "formula": "P + N",
+        "color": "red",
+        "description": "Herencia familiar negativa",
+        "category": "negativos"
+      },
+      "R": {
+        "name": "SER INFERIOR CONSCIENTE",
+        "position": "bottom-right",
+        "formula": "Q + O",
+        "color": "red",
+        "description": "Consciencia de limitaciones",
+        "category": "negativos"
+      },
+      "S": {
+        "name": "SER INFERIOR LATENTE",
+        "position": "bottom-far-right",
+        "formula": "R + resultado_formula_especial",
+        "color": "red",
+        "description": "Potencial oculto negativo",
+        "category": "negativos"
+      },
+      "W": {
+        "name": "MI PERSONALIDAD",
+        "position": "isolated-left",
+        "formula": "Suma total del nombre completo",
+        "color": "red",
+        "description": "¿Quién soy?",
+        "category": "nombre"
+      }
+    },
+    "calculations": {
+      "base_numbers": {
+        "A": "mes",
+        "B": "dia", 
+        "C": "año"
+      },
+      "derived_formulas": {
+        "D": "A + B + C",
+        "E": "A + B",
+        "F": "B + C", 
+        "G": "E + F",
+        "H": "G + I",
+        "I": "C + D",
+        "J": "H + I",
+        "K": "abs(A - B) || (10 + (A - B))",
+        "L": "abs(B - C) || (10 + (B - C))",
+        "M": "K + L",
+        "N": "abs(E - F) || (10 + (E - F))",
+        "O": "M + N",
+        "P": "abs(G - I) || (10 + (G - I))",
+        "Q": "P + N",
+        "R": "Q + O",
+        "S": "R + formula_especial"
+      }
+    },
+    "interpretations": {
+      "positive_numbers": {
+        "1": "Liderazgo, independencia, iniciativa",
+        "2": "Cooperación, diplomacia, sensibilidad",
+        "3": "Creatividad, comunicación, expresión",
+        "4": "Estabilidad, trabajo duro, organización", 
+        "5": "Libertad, aventura, cambio",
+        "6": "Responsabilidad, servicio, familia",
+        "7": "Espiritualidad, análisis, introspección",
+        "8": "Poder material, ambición, logros",
+        "9": "Humanitarismo, compasión, sabiduría",
+        "11": "Intuición, inspiración, maestría espiritual",
+        "22": "Constructor maestro, visión práctica",
+        "33": "Maestro sanador, servicio desinteresado"
+      },
+      "negative_aspects": {
+        "1": "Egoísmo, autoritarismo, impaciencia",
+        "2": "Dependencia, indecisión, timidez",
+        "3": "Superficialidad, dispersión, chisme",
+        "4": "Rigidez, limitación, pesimismo",
+        "5": "Irresponsabilidad, impaciencia, excesos",
+        "6": "Interferencia, crítica, perfeccionismo",
+        "7": "Aislamiento, frialdad, escepticismo",
+        "8": "Materialismo, dureza, obsesión por poder",
+        "9": "Impracticidad, emotividad excesiva",
+        "11": "Nerviosismo, fanatismo, impracticidad",
+        "22": "Presión excesiva, nerviosismo",
+        "33": "Mártir, sacrificio excesivo"
+      }
+    },
+    "display_config": {
+      "diagram": {
+        "width": 800,
+        "height": 600,
+        "center_x": 400,
+        "center_y": 300
+      },
+      "node_positions": {
+        "A": {"x": 150, "y": 400},
+        "B": {"x": 300, "y": 400},
+        "C": {"x": 450, "y": 400},
+        "D": {"x": 600, "y": 400},
+        "E": {"x": 200, "y": 300},
+        "F": {"x": 400, "y": 300},
+        "G": {"x": 250, "y": 200},
+        "H": {"x": 350, "y": 100},
+        "I": {"x": 350, "y": 200},
+        "J": {"x": 500, "y": 200},
+        "K": {"x": 200, "y": 500},
+        "L": {"x": 400, "y": 500},
+        "M": {"x": 300, "y": 550},
+        "N": {"x": 250, "y": 600},
+        "O": {"x": 350, "y": 600},
+        "P": {"x": 100, "y": 650},
+        "Q": {"x": 150, "y": 700},
+        "R": {"x": 250, "y": 700},
+        "S": {"x": 350, "y": 700},
+        "W": {"x": 50, "y": 550}
+      },
+      "connections": [
+        {"from": "A", "to": "B"},
+        {"from": "B", "to": "C"},
+        {"from": "C", "to": "D"},
+        {"from": "A", "to": "E"},
+        {"from": "B", "to": "E"},
+        {"from": "B", "to": "F"},
+        {"from": "C", "to": "F"},
+        {"from": "E", "to": "G"},
+        {"from": "F", "to": "G"},
+        {"from": "G", "to": "H"},
+        {"from": "I", "to": "H"},
+        {"from": "C", "to": "I"},
+        {"from": "D", "to": "I"},
+        {"from": "H", "to": "J"},
+        {"from": "I", "to": "J"},
+        {"from": "A", "to": "K"},
+        {"from": "B", "to": "K"},
+        {"from": "B", "to": "L"},
+        {"from": "C", "to": "L"},
+        {"from": "K", "to": "M"},
+        {"from": "L", "to": "M"},
+        {"from": "E", "to": "N"},
+        {"from": "F", "to": "N"},
+        {"from": "M", "to": "O"},
+        {"from": "N", "to": "O"},
+        {"from": "G", "to": "P"},
+        {"from": "I", "to": "P"},
+        {"from": "P", "to": "Q"},
+        {"from": "N", "to": "Q"},
+        {"from": "Q", "to": "R"},
+        {"from": "O", "to": "R"},
+        {"from": "R", "to": "S"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,375 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Liquid Glass styles */
+@import '../styles/liquid-glass.css';
+
+/* Existing numerology styles */
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom styles for numerology app */
+.numerology-card {
+  @apply bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-purple-200;
+}
+
+.agent-status {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.agent-active {
+  @apply bg-green-100 text-green-800;
+}
+
+.agent-idle {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.agent-working {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+/* CRITICAL FIX: Ensure input text is always visible */
+input[type="text"], 
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #d1d5db !important;
+  font-weight: 500 !important;
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #8b5cf6 !important;
+  outline: 2px solid #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3) !important;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="date"]::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+  font-weight: 400 !important;
+}
+
+/* Override any parent styles that might interfere */
+input[type="text"]:not(:focus):not(:placeholder-shown),
+input[type="number"]:not(:focus):not(:placeholder-shown),
+input[type="email"]:not(:focus):not(:placeholder-shown),
+input[type="tel"]:not(:focus):not(:placeholder-shown),
+input[type="date"]:not(:focus):not(:placeholder-shown) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Mobile input fixes for better visibility */
+@media (max-width: 768px) {
+  input[type="text"], 
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"] {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #8b5cf6 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    box-shadow: 0 0 0 1px #8b5cf6 !important;
+    font-weight: 600 !important;
+    padding: 12px 16px !important;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="date"]:focus {
+    border-color: #7c3aed !important;
+    outline: 2px solid #7c3aed !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3) !important;
+  }
+  
+  input[type="text"]::placeholder,
+  input[type="number"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="tel"]::placeholder,
+  input[type="date"]::placeholder {
+    color: #6b7280 !important;
+    opacity: 1 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Override any parent styles that might interfere */
+  input[type="text"]:not(:focus):not(:placeholder-shown),
+  input[type="number"]:not(:focus):not(:placeholder-shown),
+  input[type="email"]:not(:focus):not(:placeholder-shown),
+  input[type="tel"]:not(:focus):not(:placeholder-shown),
+  input[type="date"]:not(:focus):not(:placeholder-shown) {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .numerology-card {
+    @apply p-4 mx-2;
+  }
+  
+  /* Ensure letter labels are visible on mobile */
+  .mobile-label {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: #1f2937 !important;
+    font-weight: 700 !important;
+    padding: 2px 4px !important;
+    border-radius: 4px !important;
+  }
+}
+
+/* Force input visibility with highest specificity */
+input[type="text"] *,
+input[type="number"] *,
+input[type="email"] *,
+input[type="tel"] *,
+input[type="date"] * {
+  color: #000000 !important;
+}
+
+/* Additional global input fixes */
+input[type="text"], 
+input[type="number"] {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* FINAL FIX: Maximum specificity for input visibility */
+input[type="text"]:not([disabled]),
+input[type="number"]:not([disabled]),
+input[type="email"]:not([disabled]),
+input[type="tel"]:not([disabled]),
+input[type="date"]:not([disabled]) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Webkit-specific fixes for iOS Safari */
+@supports (-webkit-appearance: none) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"] {
+    -webkit-text-fill-color: #000000 !important;
+    color: #000000 !important;
+  }
+}
+
+/* Mobile text visibility improvements */
+@media (max-width: 768px) {
+  /* Ensure all description text is visible */
+  .numerology-card p,
+  .numerology-card h3,
+  .numerology-card .text-sm,
+  .numerology-card .text-xs {
+    color: #1f2937 !important;
+    font-weight: 500 !important;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  /* Specific color overrides for better contrast */
+  .text-blue-600 { color: #1e40af !important; }
+  .text-green-600 { color: #059669 !important; }
+  .text-purple-600 { color: #7c3aed !important; }
+  .text-orange-600 { color: #ea580c !important; }
+  .text-red-600 { color: #dc2626 !important; }
+  .text-gray-600 { color: #4b5563 !important; }
+  
+  /* Make descriptions more prominent */
+  .numerology-card .text-sm,
+  .numerology-card .text-xs {
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* CRITICAL FIX: Make large numbers dark and visible */
+  .numerology-card .text-2xl,
+  .numerology-card .text-3xl,
+  .numerology-card .text-4xl {
+    color: #000000 !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    display: inline-block !important;
+  }
+  
+  /* Specific number color fixes */
+  .text-blue-700 { color: #1e3a8a !important; }
+  .text-green-700 { color: #047857 !important; }
+  .text-purple-700 { color: #6b21a8 !important; }
+  .text-orange-700 { color: #c2410c !important; }
+  .text-red-700 { color: #b91c1c !important; }
+  .text-pink-700 { color: #be185d !important; }
+  .text-emerald-700 { color: #047857 !important; }
+  
+  /* Ensure all text in cards is visible */
+  .numerology-card * {
+    color: inherit !important;
+  }
+  
+  /* Force dark text for better visibility */
+  .numerology-card h3,
+  .numerology-card p,
+  .numerology-card span {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Add subtle background to text for better contrast */
+  .numerology-card p,
+  .numerology-card .text-sm,
+  .numerology-card .text-xs {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    padding: 2px 4px !important;
+    border-radius: 2px !important;
+    display: inline-block !important;
+  }
+  
+  /* CRITICAL FIX: Make ALL subtitle text dark and visible */
+  .numerology-card p,
+  .numerology-card .text-sm,
+  .numerology-card .text-xs,
+  .numerology-card h3,
+  .numerology-card span,
+  .numerology-card div {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    padding: 3px 6px !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+    margin: 2px 0 !important;
+  }
+  
+  /* Force all text to be black */
+  .numerology-card * {
+    color: #000000 !important;
+  }
+  
+  /* Override any light text colors */
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400,
+  .text-blue-600,
+  .text-green-600,
+  .text-purple-600,
+  .text-orange-600,
+  .text-red-600,
+  .text-pink-600,
+  .text-emerald-600 {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Mobile header fixes */
+  .text-center h1 {
+    font-size: 1.5rem !important; /* text-2xl for mobile */
+    line-height: 2rem !important;
+    padding: 0 0.5rem !important;
+    -webkit-hyphens: none !important;
+    hyphens: none !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* Mobile content spacing fixes */
+  .min-h-screen {
+    min-height: 100vh !important;
+    padding-bottom: 100px !important;
+  }
+  
+  /* Mobile box layout improvements */
+  @media (max-width: 768px) {
+    .grid-cols-1 {
+      gap: 1rem !important;
+    }
+    
+    /* Ensure boxes are properly spaced on mobile */
+    .rounded-xl {
+      margin-bottom: 1rem !important;
+      padding: 1rem !important;
+    }
+    
+    /* Make box titles more prominent */
+    .text-lg.md\\:text-xl {
+      font-size: 1.125rem !important;
+      font-weight: 700 !important;
+      margin-bottom: 1rem !important;
+    }
+    
+    /* Improve number display on mobile */
+    .text-lg.md\\:text-xl {
+      font-size: 1.25rem !important;
+      font-weight: 800 !important;
+    }
+  }
+  
+  /* Ensure all content is visible on mobile */
+  @media (max-width: 768px) {
+    .pb-32 {
+      padding-bottom: 8rem !important;
+    }
+    
+    /* Add extra bottom margin for mobile */
+    .max-w-7xl {
+      margin-bottom: 4rem !important;
+    }
+  }
+  
+  .text-center p {
+    font-size: 1rem !important; /* text-base */
+    line-height: 1.5rem !important;
+    padding: 0 0.25rem !important;
+  }
+}

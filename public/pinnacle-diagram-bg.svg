@@ -1,0 +1,39 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {/* Background Gradient */}
+  <defs>
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style={{stopColor: '#F3E8FF', stopOpacity: 1}} />
+      <stop offset="100%" style={{stopColor: '#E9D5FF', stopOpacity: 1}} />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgGradient)"/>
+
+  {/* Main Structure Lines */}
+  <g stroke="#A78BFA" strokeWidth="2" strokeOpacity="0.6">
+    {/* Outer Triangle */}
+    <path d="M 170 480 L 400 100 L 630 480 Z" />
+    {/* Inner Lines */}
+    <path d="M 170 480 L 400 290 L 630 480" />
+    <path d="M 285 385 L 515 385" />
+    <path d="M 400 100 L 400 290" />
+    {/* Connection to D */}
+    <path d="M 400 480 L 400 540" strokeDasharray="4 4" />
+    {/* Connection to I and J */}
+    <path d="M 400 290 L 400 340" strokeDasharray="4 4" />
+    <path d="M 400 100 L 400 160" strokeDasharray="4 4" />
+  </g>
+
+  {/* Node placeholders */}
+  <g fill="#C4B5FD" opacity="0.3">
+    <circle cx="170" cy="480" r="20" />
+    <circle cx="400" cy="480" r="20" />
+    <circle cx="630" cy="480" r="20" />
+    <circle cx="400" cy="540" r="20" />
+    <circle cx="285" cy="385" r="18" />
+    <circle cx="515" cy="385" r="18" />
+    <circle cx="400" cy="290" r="18" />
+    <circle cx="400" cy="100" r="20" />
+    <circle cx="400" cy="340" r="15" />
+    <circle cx="400" cy="160" r="15" />
+  </g>
+</svg>

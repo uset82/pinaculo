@@ -1,0 +1,166 @@
+{
+  "example_calculation": {
+    "input": {
+      "birth_date": "05/06/1982",
+      "day": 5,
+      "month": 6, 
+      "year": 1982
+    },
+    "base_calculations": {
+      "A": {
+        "value": 5,
+        "formula": "Mes = 6 → reducido = 6",
+        "note": "Error en imagen: muestra 5 pero debería ser 6"
+      },
+      "B": {
+        "value": 6,
+        "formula": "Día = 5 → reducido = 5", 
+        "note": "Error en imagen: muestra 6 pero debería ser 5"
+      },
+      "C": {
+        "value": 2,
+        "formula": "Año = 1982 → 1+9+8+2 = 20 → 2+0 = 2",
+        "correct": true
+      },
+      "D": {
+        "value": 22,
+        "formula": "A + B + C = 5 + 6 + 2 = 13 → pero muestra 22",
+        "note": "Número maestro preservado"
+      }
+    },
+    "derived_calculations": {
+      "E": {
+        "value": 11,
+        "formula": "A + B = 5 + 6 = 11",
+        "master_number": true
+      },
+      "F": {
+        "value": 8,
+        "formula": "B + C = 6 + 2 = 8",
+        "correct": true
+      },
+      "G": {
+        "value": 1,
+        "formula": "E + F = 11 + 8 = 19 → 1+9 = 10 → 1+0 = 1",
+        "note": "Reducción completa"
+      },
+      "H": {
+        "value": 7,
+        "formula": "G + I = 1 + 6 = 7",
+        "depends_on": "I"
+      },
+      "I": {
+        "value": 2,
+        "formula": "C + D = 2 + 22 = 24 → 2+4 = 6",
+        "note": "Muestra 2 en imagen, cálculo sugiere 6"
+      },
+      "J": {
+        "value": 11,
+        "formula": "H + I = 7 + 2 = 9",
+        "note": "Muestra 11 en imagen, cálculo sugiere 9"
+      }
+    },
+    "negative_calculations": {
+      "K": {
+        "value": 1,
+        "formula": "A - B = 5 - 6 = -1 → 10 + (-1) = 9",
+        "note": "Muestra 1 en imagen"
+      },
+      "L": {
+        "value": 4,
+        "formula": "B - C = 6 - 2 = 4",
+        "correct": true
+      },
+      "M": {
+        "value": 3,
+        "formula": "K + L = 1 + 4 = 5",
+        "note": "Muestra 3 en imagen"
+      },
+      "N": {
+        "value": 3,
+        "formula": "E - F = 11 - 8 = 3",
+        "correct": true
+      },
+      "O": {
+        "value": 8,
+        "formula": "M + N = 3 + 3 = 6",
+        "note": "Muestra 8 en imagen"
+      },
+      "P": {
+        "value": 3,
+        "formula": "G - I = 1 - 2 = -1 → 10 + (-1) = 9",
+        "note": "Muestra 3 en imagen"
+      },
+      "Q": {
+        "value": 4,
+        "formula": "P + N = 3 + 3 = 6",
+        "note": "Muestra 4 en imagen"
+      },
+      "R": {
+        "value": 7,
+        "formula": "Q + O = 4 + 8 = 12 → 1+2 = 3",
+        "note": "Muestra 7 en imagen"
+      },
+      "S": {
+        "value": 11,
+        "formula": "Cálculo especial basado en R",
+        "master_number": true
+      }
+    },
+    "interpretations_shown": {
+      "A_karma": {
+        "number": 5,
+        "description": "Mi tarea pendiente"
+      },
+      "B_personal": {
+        "number": 6, 
+        "description": "¿Quién soy?"
+      },
+      "C_vida_pasada": {
+        "number": 2,
+        "description": "¿Quién fui?"
+      },
+      "D_personalidad": {
+        "number": 22,
+        "description": "Mi máscara"
+      },
+      "I_subconsciente": {
+        "number": 2,
+        "description": "Lo guía a mi destino"
+      },
+      "J_inconsciente": {
+        "number": 11,
+        "description": "Mi espejo"
+      },
+      "P_sombra": {
+        "number": 3,
+        "description": "Número de sombra"
+      },
+      "O_inconsciente_negativo": {
+        "number": 8,
+        "description": "Número de inconsciente Negativo"
+      },
+      "Q_inferior_heredado": {
+        "number": 4,
+        "description": "Ser inferior heredado por familia"
+      },
+      "R_inferior_consciente": {
+        "number": 7,
+        "description": "Ser inferior consciente"
+      },
+      "S_inferior_latente": {
+        "number": 11,
+        "description": "Ser inferior latente"
+      }
+    }
+  },
+  "formula_corrections": {
+    "note": "Las fórmulas observadas en la imagen pueden tener inconsistencias. Este JSON proporciona tanto los valores mostrados como los cálculos correctos.",
+    "recommendations": [
+      "Verificar la reducción de números maestros (11, 22, 33)",
+      "Confirmar el manejo de números negativos (usar regla del +10)",
+      "Validar la fórmula específica para el cálculo de S",
+      "Revisar la correspondencia entre posiciones del diagrama y etiquetas"
+    ]
+  }
+}

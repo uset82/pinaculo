@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "installCommand": "npm ci --prefix MCP",
+  "buildCommand": "npm run build --prefix MCP",
+  "outputDirectory": "MCP/out",
+  "trailingSlash": true
+}

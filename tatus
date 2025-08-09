@@ -1,0 +1,3 @@
+[33m77298eb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m cleanup: remove all mode toggles and simplify app to single calculator interface
+[33m5400bdd[m remove: eliminate PinaculoCalculatorComplete section completely from main page
+[33m58ff768[m remove: eliminate interpretaciones detalladas section completely
