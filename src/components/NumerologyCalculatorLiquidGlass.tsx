@@ -81,7 +81,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
       case 'O':
         return 'bg-rose-500/20 text-rose-300'
       case 'P':
-        return 'bg-indigo-500/20 text-indigo-300'
+        return 'bg-rose-500/20 text-rose-300'
       case 'Q':
         return 'bg-lime-500/20 text-lime-300'
       case 'R':
