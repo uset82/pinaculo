@@ -41,19 +41,19 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-pulse text-lg text-gray-600">Cargando tu Diagrama del Pináculo...</div>
+        <div className="animate-pulse text-lg text-white/80">Cargando tu Diagrama del Pináculo...</div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-        <h3 className="text-red-800 font-semibold mb-2">Error cargando el Pináculo</h3>
-        <p className="text-red-600 mb-4">{error}</p>
-        <button 
-          onClick={() => window.location.reload()} 
-          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+      <div className="p-6 bg-rose-500/10 border border-rose-300/30 rounded-lg backdrop-blur-sm">
+        <h3 className="text-white/90 font-semibold mb-2">Error cargando el Pináculo</h3>
+        <p className="text-white/70 mb-4">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 rounded-lg bg-rose-500/30 text-white hover:bg-rose-500/40 transition-colors"
         >
           Reintentar
         </button>
@@ -63,16 +63,12 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
 
   if (!structure || !calculations || !birthDay || !birthMonth || !birthYear) {
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-8 text-center">
-        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="p-8 text-center bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+        <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20">
           <span className="text-2xl">🎭</span>
         </div>
-        <p className="text-blue-800 text-lg">
-          ¡Tu Diagrama del Pináculo está listo!
-        </p>
-        <p className="text-blue-600 mt-2">
-          Ingresa tu nombre y fecha de nacimiento arriba para ver tu mapa numerológico personalizado.
-        </p>
+        <p className="text-white/90 text-lg">¡Tu Diagrama del Pináculo está listo!</p>
+        <p className="text-white/70 mt-2">Ingresa tu nombre y fecha de nacimiento arriba para ver tu mapa numerológico personalizado.</p>
       </div>
     )
   }
@@ -95,16 +91,16 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       emphasize?: boolean
     }) => {
       const variantClass: Record<string, string> = {
-        base: 'bg-purple-100 text-purple-900 border-purple-300',
-        positive: 'bg-green-200 text-green-900 border-green-400',
-        negative: 'bg-rose-200 text-rose-900 border-rose-300',
+        base: 'bg-purple-500/20 text-purple-200 border-purple-400/30',
+        positive: 'bg-green-500/20 text-green-200 border-green-400/30',
+        negative: 'bg-rose-500/20 text-rose-200 border-rose-400/30',
       }
       return (
         <div className="relative flex flex-col items-center">
-          <div className={`${size} ${variantClass[variant]} rounded-full flex items-center justify-center shadow-md border ${emphasize ? 'ring-4 ring-amber-400' : ''}`}>
+          <div className={`${size} ${variantClass[variant]} rounded-full flex items-center justify-center border backdrop-blur-sm ${emphasize ? 'ring-4 ring-amber-400/40' : ''}`}>
             <span className="font-extrabold text-xl">{number}</span>
           </div>
-          <div className="text-sm font-bold mt-1 text-gray-800">{letter}</div>
+          <div className="text-sm font-bold mt-1 text-white/80">{letter}</div>
         </div>
       )
     }
@@ -268,91 +264,91 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
         {/* Legend/Descriptions Panel from PPT */}
         <div className="w-full lg:w-1/3 lg:pl-6">
           <div className="space-y-4">
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-              <h4 className="font-bold text-blue-800 mb-3">Tu Pináculo Personal (PPT CLASE 1)</h4>
-              <div className="space-y-2 text-sm">
+            <div className="p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+              <h4 className="font-bold text-white/90 mb-3">Tu Pináculo Personal (PPT CLASE 1)</h4>
+              <div className="space-y-2 text-sm text-white/80">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
                     <span>A. Tarea No Aprendida</span>
                   </div>
-                  <span className="font-bold text-purple-600">{calculations.A}</span>
+                  <span className="font-bold text-purple-300">{calculations.A}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
                     <span>B. Mi Esencia</span>
                   </div>
-                  <span className="font-bold text-blue-600">{calculations.B}</span>
+                  <span className="font-bold text-blue-300">{calculations.B}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-purple-400 rounded-full mr-2"></div>
                     <span>C. Vida Pasada</span>
                   </div>
-                  <span className="font-bold text-purple-600">{calculations.C}</span>
+                  <span className="font-bold text-purple-300">{calculations.C}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.D === 22 ? 'bg-yellow-600' : 'bg-purple-600'} rounded-full mr-2`}></div>
+                    <div className={`w-3 h-3 ${calculations.D === 22 ? 'bg-yellow-400' : 'bg-purple-600'} rounded-full mr-2`}></div>
                     <span>D. Mi Máscara</span>
                   </div>
-                  <span className={`font-bold ${calculations.D === 22 ? 'text-yellow-600' : 'text-purple-600'}`}>{calculations.D}</span>
+                  <span className={`font-bold ${calculations.D === 22 ? 'text-yellow-300' : 'text-purple-300'}`}>{calculations.D}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
                     <span>I. Núm. del Subconsciente</span>
                   </div>
-                  <span className="font-bold text-yellow-600">{calculations.I}</span>
+                  <span className="font-bold text-yellow-300">{calculations.I}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.J === 11 ? 'bg-yellow-500' : 'bg-blue-600'} rounded-full mr-2`}></div>
+                    <div className={`w-3 h-3 ${calculations.J === 11 ? 'bg-yellow-400' : 'bg-blue-600'} rounded-full mr-2`}></div>
                     <span>J. Número del Inconsciente</span>
                   </div>
-                  <span className={`font-bold ${calculations.J === 11 ? 'text-yellow-600' : 'text-blue-600'}`}>{calculations.J}</span>
+                  <span className={`font-bold ${calculations.J === 11 ? 'text-yellow-300' : 'text-blue-300'}`}>{calculations.J}</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-red-50 p-4 rounded-lg border border-red-200">
-              <h4 className="font-bold text-red-800 mb-3">Números Negativos</h4>
-              <div className="space-y-2 text-sm">
+            <div className="p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+              <h4 className="font-bold text-white/90 mb-3">Números Negativos</h4>
+              <div className="space-y-2 text-sm text-white/80">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
                     <span>P. Mi Sombra</span>
                   </div>
-                  <span className="font-bold text-red-600">{calculations.P}</span>
+                  <span className="font-bold text-rose-300">{calculations.P}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
                     <span>O. Número de Inconsciente Negativo</span>
                   </div>
-                  <span className="font-bold text-red-600">{calculations.O}</span>
+                  <span className="font-bold text-rose-300">{calculations.O}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
                     <span>Q. Ser Inferior 1</span>
                   </div>
-                  <span className="font-bold text-red-600">{calculations.Q}</span>
+                  <span className="font-bold text-rose-300">{calculations.Q}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
                     <span>R. Ser Inferior 2</span>
                   </div>
-                  <span className="font-bold text-red-600">{calculations.R}</span>
+                  <span className="font-bold text-rose-300">{calculations.R}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.S === 11 ? 'bg-yellow-600' : 'bg-red-600'} rounded-full mr-2`}></div>
+                    <div className={`w-3 h-3 ${calculations.S === 11 ? 'bg-yellow-400' : 'bg-red-600'} rounded-full mr-2`}></div>
                     <span>S. Ser Inferior 3</span>
                   </div>
-                  <span className={`font-bold ${calculations.S === 11 ? 'text-yellow-600' : 'text-red-600'}`}>{calculations.S}</span>
+                  <span className={`font-bold ${calculations.S === 11 ? 'text-yellow-300' : 'text-rose-300'}`}>{calculations.S}</span>
                 </div>
               </div>
             </div>

@@ -602,16 +602,16 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <h3 className="text-xl font-bold text-white/90 drop-shadow">7. Diagrama del Pináculo</h3>
             </div>
             <div className="space-y-3">
-              <PinaculoDiagram 
+              <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+                <PinaculoDiagram 
                 birthDay={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[0])}
                 birthMonth={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[1])}
                 birthYear={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[2])}
                 name={isPreviewMode ? previewData.name : name}
-              />
+                />
+              </div>
               <div className="text-center mt-3">
-                <p className="text-white/70 text-xs">
-                  Representación visual de tu estructura numerológica completa
-                </p>
+                <p className="text-white/70 text-xs">Representación visual de tu estructura numerológica completa</p>
               </div>
             </div>
           </div>
