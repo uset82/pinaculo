@@ -325,6 +325,22 @@
         "description": "Tercera capa de limitaciones",
         "verified": true
       },
+      "T": {
+        "id": "T",
+        "letter": "T",
+        "name": "AUSENCIAS",
+        "formula": "Ausencias del nombre",
+        "type": "negative",
+        "level": 8,
+        "position": {
+          "x": 62,
+          "y": 92
+        },
+        "color": "#EF4444",
+        "category": "especial",
+        "description": "Caja de Ausencias (círculo T dentro del cuadrado)",
+        "verified": true
+      },
       "X": {
         "id": "X",
         "letter": "X",

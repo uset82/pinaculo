@@ -1,8 +1,13 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+import { useComputedValues } from '@/hooks/useComputedValues'
+import positionsJson from '@/data/pinaculo-positions.json'
+const defaultPositions: Record<string, { x: number; y: number }> = positionsJson as any
+const STORAGE_KEY = 'pinaculo-editor-positions'
 import { PinnacleStructure, PinaculoCalculator, PinaculoResults } from '@/types/pinaculo'
 import structureDataJson from '@/data/pinaculo-structure.json'
+import accurateData from '@/data/pinaculo-diagram-accurate.json'
 
 interface PinaculoDiagramProps {
   birthDay?: number
@@ -17,6 +22,11 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [bgSvgMarkup, setBgSvgMarkup] = useState<string | null>(null)
+  const [localPositions, setLocalPositions] = useState<Record<string, { x: number; y: number }>>(defaultPositions)
+  const connections = useMemo(() => {
+    const p = (accurateData as any)?.pinnacle?.connections as Array<{ from: string; to: string; type: 'calculation' | 'negative' | 'base' }>
+    return Array.isArray(p) ? p : []
+  }, [])
   const SHOW_DETAIL_PANELS = false
 
   useEffect(() => {
@@ -38,6 +48,9 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       setCalculations(calc)
     }
   }, [birthDay, birthMonth, birthYear, name])
+
+  // Map calculations to flat values for rendering (always call to keep hooks order stable)
+  const values = useComputedValues(calculations)
 
   // Load sanitized SVG background once
   useEffect(() => {
@@ -61,6 +74,25 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       })
       .catch(() => {})
     return () => { isMounted = false }
+  }, [])
+
+  // Load saved positions (if any) from localStorage so the main diagram reflects editor changes
+  useEffect(() => {
+    try {
+      const saved = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null
+      if (saved) {
+        const parsed = JSON.parse(saved) as Record<string, { x: number; y: number }>
+        const normalized: Record<string, { x: number; y: number }> = {}
+        for (const k of Object.keys(parsed)) {
+          const p = parsed[k]
+          // Accept both 0..1 and 0..100; normalize to 0..1 for the main diagram
+          const nx = p.x > 1 ? p.x / 100 : p.x
+          const ny = p.y > 1 ? p.y / 100 : p.y
+          normalized[k] = { x: nx, y: ny }
+        }
+        setLocalPositions((prev) => ({ ...prev, ...normalized }))
+      }
+    } catch {}
   }, [])
 
   if (loading) {
@@ -138,142 +170,161 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
         {/* Main Diagram using the principal SVG layout only with numbers */}
         <div className="flex-1 flex justify-center overflow-x-auto">
           <div className="relative min-w-max w-[700px] h-[600px]">
-            {bgSvgMarkup && (
-              <div
-                className="absolute inset-0 opacity-25 pointer-events-none select-none"
-                dangerouslySetInnerHTML={{ __html: bgSvgMarkup }}
-              />
-            )}
-            {/* Render only numbers positioned above the SVG layout */}
-            {/* H */}
-            <div className="absolute top-[0px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.H}</div>
-            {/* G */}
-            <div className="absolute top-[80px] left-[50%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.G}</div>
-            {/* J */}
-            <div className="absolute top-[80px] left-[80%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.J}</div>
-            {/* E I F */}
-            <div className="absolute top-[160px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.E}</div>
-            <div className="absolute top-[160px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.I}</div>
-            <div className="absolute top-[160px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.F}</div>
-            {/* A B C D */}
-            <div className="absolute top-[240px] left-[15%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.A}</div>
-            <div className="absolute top-[240px] left-[40%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.B}</div>
-            <div className="absolute top-[240px] left-[60%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.C}</div>
-            <div className="absolute top-[240px] left-[85%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.D}</div>
-            {/* K O L */}
-            <div className="absolute top-[320px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.K}</div>
-            <div className="absolute top-[320px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.O}</div>
-            <div className="absolute top-[320px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.L}</div>
-            {/* M */}
-            <div className="absolute top-[400px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.M}</div>
-            {/* P N */}
-            <div className="absolute top-[400px] left-[30%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.P}</div>
-            <div className="absolute top-[400px] left-[70%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.N}</div>
-            {/* Q R S */}
-            <div className="absolute top-[480px] left-[25%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.Q}</div>
-            <div className="absolute top-[480px] left-1/2 -translate-x-1/2 transform text-white/90 font-bold">{calculations.R}</div>
-            <div className="absolute top-[480px] left-[75%] -translate-x-1/2 transform text-white/90 font-bold">{calculations.S}</div>
-            {/* W */}
-            {((Array.isArray(W) && W.length > 0) || (!Array.isArray(W) && W !== 0)) && (
-              <div className="absolute top-[320px] left-[5%] -translate-x-1/2 transform text-white/90 font-bold">
-                {Array.isArray(W) ? W.join(', ') : W}
-              </div>
-            )}
+            {/* Background SVG removed per request so only our rendering is visible */}
+            {/* Connections removed per request */}
+            {Object.keys(localPositions).map((key) => {
+              const pos = (localPositions as any)[key]
+              const val = (values as any)[key]
+              if (typeof val === 'undefined') return null
+              // Force vertical alignment for central column: H,G,I,B,O,M,N,R share B's X
+              const centralKeys = ['H','G','I','B','O','M','N','R']
+              const bx = (localPositions as any)['B']?.x ?? pos.x
+              // Alignment: (E,K,Q) share A's X; (F,C,L,S) share C's X
+              // New vertical axis: (J,D,X,Y) share D's X
+              const leftColumn = ['E','K','Q','W','P']
+              const rightColumn = ['F','C','L','S']
+              const rightDXColumn = ['J','D','X','Y']
+              const ax = (localPositions as any)['A']?.x ?? pos.x
+              const cx = (localPositions as any)['C']?.x ?? pos.x
+              const dx = (localPositions as any)['D']?.x ?? pos.x
+              // Pull side columns slightly toward the center (closer to B) to reduce the gap
+              // For left column keep near A but slightly outward for breathing room
+              const leftAdjustedX = Math.max(0, ax - 0.01)
+              // For F/C/L/S keep vertical on C and a little farther from the center (outward)
+              const rightAdjustedX = Math.min(1, cx + 0.02)
+              const baseX = centralKeys.includes(key)
+                ? bx
+                : leftColumn.includes(key)
+                ? leftAdjustedX
+                : rightDXColumn.includes(key)
+                ? dx
+                : rightColumn.includes(key)
+                ? rightAdjustedX
+                : pos.x
+              // Align T vertically with R (center of Q-R-S row)
+              let adjBaseX = baseX
+              if (key === 'T') {
+                // Align T with the central vertical axis (same as R which uses B's X)
+                adjBaseX = bx
+              }
+              const renderX = Math.min(1, Math.max(0, adjBaseX))
+
+              // Horizontal alignment by rows
+              const iy = (localPositions as any)['I']?.y ?? pos.y
+              const gy = (localPositions as any)['G']?.y ?? (iy - 0.08)
+              const step = Math.abs(iy - gy) || 0.08
+              // Slightly larger gaps below I (between EIFJ -> ABCD) and below B (ABCD -> KOLX)
+              const gapAfterEIFJ = step * 1.18
+              const gapAfterABCD = step * 1.22
+              const yEIFJ = iy
+              const yABCD = yEIFJ + gapAfterEIFJ
+              const yKOLX = yABCD + gapAfterABCD
+              const yWMY = yKOLX + step
+              const yPN = yWMY + step
+              const yQRS = yPN + step
+              const yRow = {
+                H: Math.max(0, gy - step),
+                G: gy,
+                EIFJ: yEIFJ,
+                ABCD: yABCD,
+                KOLX: yKOLX,
+                WMY: yWMY,
+                PN: yPN,
+                QRS: yQRS,
+              }
+              const rowEIFJ = ['E','I','F','J']
+              const rowABCD = ['A','B','C','D']
+              const rowKOLX = ['K','O','L','X']
+              const rowWMY = ['W','M','Y']
+              const rowPN = ['P','N']
+              const rowQRS = ['Q','R','S']
+              let baseY = key === 'H' ? yRow.H
+                : key === 'G' ? yRow.G
+                : rowEIFJ.includes(key) ? yRow.EIFJ
+                : rowABCD.includes(key) ? yRow.ABCD
+                : rowKOLX.includes(key) ? yRow.KOLX
+                : rowWMY.includes(key) ? yRow.WMY
+                : rowPN.includes(key) ? yRow.PN
+                : rowQRS.includes(key) ? yRow.QRS
+                : pos.y
+              const left = `${renderX * 100}%`
+              const top = `${baseY * 100}%`
+              const text = Array.isArray(val) ? val.join(', ') : val
+              const isSquareYellow = key === 'Z'
+              const isSquareRed = key === 'T'
+              const isPositive = 'EFGHIJ'.includes(key)
+              const isBaseOrXY = 'ABCDXY'.includes(key)
+              const isNegative = 'KOLWPMNQRST'.includes(key)
+
+              const bgClass = isSquareYellow
+                ? 'bg-yellow-400/30 border-yellow-300/40'
+                : isSquareRed
+                ? 'bg-rose-500/30 border-rose-400/40'
+                : isPositive
+                ? 'bg-green-500/25 border-green-400/40'
+                : isBaseOrXY
+                ? 'bg-purple-500/25 border-purple-400/40'
+                : isNegative
+                ? 'bg-rose-500/25 border-rose-400/40'
+                : 'bg-white/10 border-white/30'
+
+              // Only B should be larger; others slightly smaller for clarity
+              const sizeClass = key === 'B' ? 'w-14 h-14' : 'w-9 h-9'
+              const shapeClass = isSquareYellow || isSquareRed ? `rounded-md ${sizeClass}` : `rounded-full ${sizeClass}`
+
+              return (
+                <div key={key} className="absolute -translate-x-1/2 -translate-y-1/2 text-white/90 font-extrabold drop-shadow flex flex-col items-center" style={{ left, top }}>
+                  <div className={`flex items-center justify-center border ${bgClass} ${shapeClass}`}>
+                    <span className={key === 'B' ? 'text-[18px] leading-none' : 'text-[14px] leading-none'}>{text}</span>
+                  </div>
+                  <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
+                </div>
+              )
+            })}
           </div>
         </div>
 
-        {/* Legend/Descriptions Panel from PPT */}
+        {/* Legend/Descriptions Panel (updated) */}
         <div className="w-full lg:w-1/3 lg:pl-6">
-          <div className="space-y-4">
-            <div className="p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-              <h4 className="font-bold text-white/90 mb-3">Tu Pináculo Personal (PPT CLASE 1)</h4>
-              <div className="space-y-2 text-sm text-white/80">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
-                    <span>A. Tarea No Aprendida</span>
-                  </div>
-                  <span className="font-bold text-purple-300">{calculations.A}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-                    <span>B. Mi Esencia</span>
-                  </div>
-                  <span className="font-bold text-blue-300">{calculations.B}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-purple-400 rounded-full mr-2"></div>
-                    <span>C. Vida Pasada</span>
-                  </div>
-                  <span className="font-bold text-purple-300">{calculations.C}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.D === 22 ? 'bg-yellow-400' : 'bg-purple-600'} rounded-full mr-2`}></div>
-                    <span>D. Mi Máscara</span>
-                  </div>
-                  <span className={`font-bold ${calculations.D === 22 ? 'text-yellow-300' : 'text-purple-300'}`}>{calculations.D}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
-                    <span>I. Núm. del Subconsciente</span>
-                  </div>
-                  <span className="font-bold text-yellow-300">{calculations.I}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.J === 11 ? 'bg-yellow-400' : 'bg-blue-600'} rounded-full mr-2`}></div>
-                    <span>J. Número del Inconsciente</span>
-                  </div>
-                  <span className={`font-bold ${calculations.J === 11 ? 'text-yellow-300' : 'text-blue-300'}`}>{calculations.J}</span>
-                </div>
-              </div>
+          <div className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10 divide-y divide-white/10">
+            <h4 className="font-bold text-white/90 mb-4">🔢 Números y sus Significados</h4>
+
+            {/* Purple group */}
+            <div className="text-sm">
+              <LegendRow color="purple" label="A. Número de Karma – Mi tarea pendiente" value={calculations.A} />
+              <LegendRow color="purple" label="B. Número personal – ¿Quién soy?" value={calculations.B} />
+              <LegendRow color="purple" label="C. Número de vida pasada – ¿Quién fui?" value={calculations.C} />
+              <LegendRow color="purple" label="D. Número de personalidad – Mi máscara" value={calculations.D} />
             </div>
 
-            <div className="p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
-              <h4 className="font-bold text-white/90 mb-3">Números Negativos</h4>
-              <div className="space-y-2 text-sm text-white/80">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                    <span>P. Mi Sombra</span>
-                  </div>
-                  <span className="font-bold text-rose-300">{calculations.P}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
-                    <span>O. Número de Inconsciente Negativo</span>
-                  </div>
-                  <span className="font-bold text-rose-300">{calculations.O}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
-                    <span>Q. Ser Inferior 1</span>
-                  </div>
-                  <span className="font-bold text-rose-300">{calculations.Q}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
-                    <span>R. Ser Inferior 2</span>
-                  </div>
-                  <span className="font-bold text-rose-300">{calculations.R}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className={`w-3 h-3 ${calculations.S === 11 ? 'bg-yellow-400' : 'bg-red-600'} rounded-full mr-2`}></div>
-                    <span>S. Ser Inferior 3</span>
-                  </div>
-                  <span className={`font-bold ${calculations.S === 11 ? 'text-yellow-300' : 'text-rose-300'}`}>{calculations.S}</span>
-                </div>
-              </div>
+            {/* Green group */}
+            <div className="text-sm">
+              <LegendRow color="green" label="I. Número del subconsciente – La guía a mi destino" value={calculations.I} />
+              <LegendRow color="green" label="J. Número del inconsciente – Mi espejo" value={calculations.J} />
+            </div>
+
+            {/* Red group */}
+            <div className="text-sm">
+              <LegendRow color="red" label="P. Número de sombra" value={calculations.P} />
+              <LegendRow color="red" label="O. Número de inconsciente negativo" value={calculations.O} />
+              <LegendRow color="red" label="Q. Ser inferior heredado por familia" value={calculations.Q} />
+              <LegendRow color="red" label="R. Ser inferior consciente" value={calculations.R} />
+              <LegendRow color="red" label="S. Ser inferior latente" value={calculations.S} />
             </div>
           </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Small legend row component for consistency
+  function LegendRow({ color, label, value }: { color: 'purple' | 'green' | 'red'; label: string; value: number }) {
+    const badgeBg = color === 'purple' ? 'bg-purple-500/20 text-purple-200' : color === 'green' ? 'bg-green-500/20 text-green-200' : 'bg-rose-500/20 text-rose-200'
+    return (
+      <div className="py-2">
+        <div className="flex items-center justify-between">
+          <span className="text-white/85 font-semibold text-sm leading-snug">{label}</span>
+          <span className={`shrink-0 ml-3 px-2 py-0.5 rounded ${badgeBg} text-sm font-bold`}>{value}</span>
         </div>
       </div>
     )

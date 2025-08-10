@@ -1,0 +1,485 @@
+{
+  "pinnacle": {
+    "title": "Diagrama del Pináculo - Sistema Numerológico Completo",
+    "version": "2.0",
+    "source": "PPT CLASE 1.pdf + CSV Analysis",
+    "description": "Sistema completo del pináculo con todas las posiciones, conexiones y fórmulas actualizadas",
+    "nodes": {
+      "H": {
+        "id": "H",
+        "letter": "H",
+        "name": "TU DESTINO",
+        "position": {
+          "x": 47,
+          "y": 15
+        },
+        "color": "#10B981",
+        "type": "positive"
+      },
+      "G": {
+        "id": "G",
+        "letter": "G",
+        "name": "RE-IDENTIFICACIÓN CON TU YO",
+        "position": {
+          "x": 47,
+          "y": 25
+        },
+        "color": "#34D399",
+        "type": "positive"
+      },
+      "J": {
+        "id": "J",
+        "letter": "J",
+        "name": "MI ESPEJO",
+        "position": {
+          "x": 60,
+          "y": 34
+        },
+        "color": "#34D399",
+        "type": "positive"
+      },
+      "E": {
+        "id": "E",
+        "letter": "E",
+        "name": "IMPLANTACIÓN DEL PROGRAMA",
+        "position": {
+          "x": 42,
+          "y": 34
+        },
+        "color": "#6EE7B7",
+        "type": "positive"
+      },
+      "I": {
+        "id": "I",
+        "letter": "I",
+        "name": "INCONSCIENTE",
+        "position": {
+          "x": 47,
+          "y": 34
+        },
+        "color": "#6EE7B7",
+        "type": "positive"
+      },
+      "F": {
+        "id": "F",
+        "letter": "F",
+        "name": "ENCUENTRO CON TU MAESTRO",
+        "position": {
+          "x": 52,
+          "y": 34
+        },
+        "color": "#6EE7B7",
+        "type": "positive"
+      },
+      "A": {
+        "id": "A",
+        "letter": "A",
+        "name": "TAREA NO APRENDIDA",
+        "position": {
+          "x": 38,
+          "y": 45
+        },
+        "color": "#9333EA",
+        "type": "base"
+      },
+      "B": {
+        "id": "B",
+        "letter": "B",
+        "name": "MI ESENCIA",
+        "position": {
+          "x": 47,
+          "y": 46
+        },
+        "color": "#9333EA",
+        "type": "base"
+      },
+      "C": {
+        "id": "C",
+        "letter": "C",
+        "name": "MI VIDA PASADA",
+        "position": {
+          "x": 56,
+          "y": 45
+        },
+        "color": "#9333EA",
+        "type": "base"
+      },
+      "D": {
+        "id": "D",
+        "letter": "D",
+        "name": "MI MÁSCARA",
+        "position": {
+          "x": 62,
+          "y": 45
+        },
+        "color": "#9333EA",
+        "type": "base"
+      },
+      "K": {
+        "id": "K",
+        "letter": "K",
+        "name": "ADOLESCENCIA",
+        "position": {
+          "x": 42,
+          "y": 57
+        },
+        "color": "#EF4444",
+        "type": "negative"
+      },
+      "O": {
+        "id": "O",
+        "letter": "O",
+        "name": "INCONSCIENTE NEGATIVO",
+        "position": {
+          "x": 47,
+          "y": 57
+        },
+        "color": "#EF4444",
+        "type": "negative"
+      },
+      "L": {
+        "id": "L",
+        "letter": "L",
+        "name": "JUVENTUD",
+        "position": {
+          "x": 52,
+          "y": 57
+        },
+        "color": "#EF4444",
+        "type": "negative"
+      },
+      "W": {
+        "id": "W",
+        "letter": "W",
+        "name": "TRIPLICIDAD",
+        "position": {
+          "x": 38,
+          "y": 67
+        },
+        "color": "#DC2626",
+        "type": "negative"
+      },
+      "M": {
+        "id": "M",
+        "letter": "M",
+        "name": "ADULTEZ",
+        "position": {
+          "x": 47,
+          "y": 67
+        },
+        "color": "#F87171",
+        "type": "negative"
+      },
+      "P": {
+        "id": "P",
+        "letter": "P",
+        "name": "MI SOMBRA",
+        "position": {
+          "x": 41,
+          "y": 76
+        },
+        "color": "#F87171",
+        "type": "negative"
+      },
+      "N": {
+        "id": "N",
+        "letter": "N",
+        "name": "ADULTO MAYOR",
+        "position": {
+          "x": 47,
+          "y": 76
+        },
+        "color": "#F87171",
+        "type": "negative"
+      },
+      "Q": {
+        "id": "Q",
+        "letter": "Q",
+        "name": "SER INFERIOR 1",
+        "position": {
+          "x": 42,
+          "y": 86
+        },
+        "color": "#FCA5A5",
+        "type": "negative"
+      },
+      "R": {
+        "id": "R",
+        "letter": "R",
+        "name": "SER INFERIOR 2",
+        "position": {
+          "x": 47,
+          "y": 86
+        },
+        "color": "#FCA5A5",
+        "type": "negative"
+      },
+      "S": {
+        "id": "S",
+        "letter": "S",
+        "name": "SER INFERIOR 3",
+        "position": {
+          "x": 52,
+          "y": 86
+        },
+        "color": "#FCA5A5",
+        "type": "negative"
+      },
+      "T": {
+        "id": "T",
+        "letter": "T",
+        "name": "AUSENCIAS",
+        "position": {
+          "x": 60,
+          "y": 83
+        },
+        "color": "#EF4444",
+        "type": "negative"
+      },
+      "X": {
+        "id": "X",
+        "letter": "X",
+        "name": "REACCIÓN",
+        "position": {
+          "x": 62,
+          "y": 57
+        },
+        "color": "#10B981",
+        "type": "positive"
+      },
+      "Y": {
+        "id": "Y",
+        "letter": "Y",
+        "name": "MISIÓN",
+        "position": {
+          "x": 62,
+          "y": 67
+        },
+        "color": "#10B981",
+        "type": "positive"
+      },
+      "Z": {
+        "id": "Z",
+        "letter": "Z",
+        "name": "REGALO DIVINO",
+        "position": {
+          "x": 61,
+          "y": 14
+        },
+        "color": "#FBBF24",
+        "type": "special"
+      }
+    },
+    "connections": [
+      {
+        "from": "A",
+        "to": "B",
+        "type": "base"
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "type": "base"
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "type": "base"
+      },
+      {
+        "from": "H",
+        "to": "E",
+        "type": "calculation"
+      },
+      {
+        "from": "H",
+        "to": "J",
+        "type": "calculation"
+      },
+      {
+        "from": "E",
+        "to": "A",
+        "type": "calculation"
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "type": "calculation"
+      },
+      {
+        "from": "F",
+        "to": "B",
+        "type": "calculation"
+      },
+      {
+        "from": "F",
+        "to": "C",
+        "type": "calculation"
+      },
+      {
+        "from": "G",
+        "to": "E",
+        "type": "calculation"
+      },
+      {
+        "from": "G",
+        "to": "F",
+        "type": "calculation"
+      },
+      {
+        "from": "I",
+        "to": "B",
+        "type": "calculation"
+      },
+      {
+        "from": "D",
+        "to": "X",
+        "type": "calculation"
+      },
+      {
+        "from": "B",
+        "to": "X",
+        "type": "calculation"
+      },
+      {
+        "from": "D",
+        "to": "J",
+        "type": "calculation"
+      },
+      {
+        "from": "X",
+        "to": "Y",
+        "type": "calculation"
+      },
+      {
+        "from": "A",
+        "to": "K",
+        "type": "negative"
+      },
+      {
+        "from": "B",
+        "to": "K",
+        "type": "negative"
+      },
+      {
+        "from": "B",
+        "to": "L",
+        "type": "negative"
+      },
+      {
+        "from": "C",
+        "to": "L",
+        "type": "negative"
+      },
+      {
+        "from": "K",
+        "to": "O",
+        "type": "negative"
+      },
+      {
+        "from": "L",
+        "to": "O",
+        "type": "negative"
+      },
+      {
+        "from": "O",
+        "to": "M",
+        "type": "negative"
+      },
+      {
+        "from": "P",
+        "to": "Q",
+        "type": "negative"
+      },
+      {
+        "from": "N",
+        "to": "R",
+        "type": "negative"
+      },
+      {
+        "from": "K",
+        "to": "Q",
+        "type": "negative"
+      },
+      {
+        "from": "M",
+        "to": "Q",
+        "type": "negative"
+      },
+      {
+        "from": "L",
+        "to": "R",
+        "type": "negative"
+      },
+      {
+        "from": "M",
+        "to": "R",
+        "type": "negative"
+      },
+      {
+        "from": "Q",
+        "to": "S",
+        "type": "negative"
+      },
+      {
+        "from": "R",
+        "to": "S",
+        "type": "negative"
+      }
+    ],
+    "formulas": {
+      "base_reduction": "Si el número > 9 y no es 11, 22, 33: reducir sumando dígitos hasta obtener 1-9 o número maestro",
+      "negative_calculation": "Si resta da negativo: usar valor absoluto |a - b|",
+      "special_case_M": "Si K = L, entonces M = K + L; si K ≠ L, entonces M = |K - L|",
+      "special_case_W": "Triplicidad basada en K..S (tres repeticiones)",
+      "special_case_Z": "Tomar últimos 2 dígitos del año y reducir si > 9"
+    },
+    "caldeo_system": {},
+    "calculation_order": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ],
+    "display": {
+      "width": 800,
+      "height": 600,
+      "node_radius": 30,
+      "connection_style": {
+        "positive": {
+          "color": "#3B82F6",
+          "width": 2
+        },
+        "negative": {
+          "color": "#EF4444",
+          "width": 2
+        },
+        "base": {
+          "color": "#9333EA",
+          "width": 2
+        }
+      }
+    },
+    "lastUpdated": "2025-07-29T21:35:13.398Z",
+    "verified": true
+  }
+}

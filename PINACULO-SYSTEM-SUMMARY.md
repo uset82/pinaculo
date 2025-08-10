@@ -121,3 +121,19 @@ Z = Suma de todos los dígitos del año completo (reducidos)
 4. Sistema de agentes MCP actualizado
 
 **Los cálculos para "CARLOS CARPIO" (06/05/1982) ahora son IDÉNTICOS a https://numerologia-cotidiana.com/#mapa**
+
+
+
+
+
+
+the pinaculo looks DESIGN 
+1. you have removed N from the main long line  VERTICAL AND THEY SHOULD BE ALIGNED (H G I B O M N R )
+2. (E I F J  ) SHOULD BE ALIGNED  HORIZONTAL 
+3. (A B C D ) SHOULD BE ALIGNED HORIZONTAL 
+
+4.  (E K Q )  SHOULD BE ALIGNED  VERTICALLY 
+5 (F L S )SHOULD BE ALIGNED  VERTICALLY 
+6. (K O L )SHOULD BE ALIGNED HORIZONTAL 
+7. (P N ) SHOULD BE ALIGNED HORIZONTAL  
+8. ( Q R S ) SHOULD BE ALIGNED HORIZONTAL  

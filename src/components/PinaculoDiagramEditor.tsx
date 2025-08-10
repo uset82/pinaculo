@@ -52,6 +52,7 @@ export function PinaculoDiagramEditor() {
   const [snapStep, setSnapStep] = useState(1) // percent
   const [dragging, setDragging] = useState<string | null>(null)
   const dragStart = useRef<{ id: string; startX: number; startY: number; orig: NodePos } | null>(null)
+  const [showConnections, setShowConnections] = useState(false)
 
   const pinnacle = (accurateData as unknown as AccurateJson).pinnacle
   const initialNodes = useMemo(() => {
@@ -131,6 +132,12 @@ export function PinaculoDiagramEditor() {
     dragStart.current = null
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
+    // Auto-save positions after drag
+    const positions: Record<string, NodePos> = {}
+    Object.values(nodes).forEach(n => { positions[n.letter] = n.position })
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(positions))
+    } catch {}
   }
 
   // Export helpers
@@ -202,6 +209,10 @@ export function PinaculoDiagramEditor() {
           <span>Snap</span>
         </label>
         <label className="flex items-center gap-2">
+          <input type="checkbox" checked={showConnections} onChange={e => setShowConnections(e.target.checked)} />
+          <span>Mostrar conectores</span>
+        </label>
+        <label className="flex items-center gap-2">
           Paso
           <input type="number" className="w-16 border rounded px-2 py-1" min={0.25} step={0.25} value={snapStep} onChange={e => setSnapStep(parseFloat(e.target.value || '1'))} />%
         </label>
@@ -215,7 +226,7 @@ export function PinaculoDiagramEditor() {
           {/* Background reference image */}
           {showBg && (
             <img
-              src="/pinnacle-diagram-bg.svg"
+              src="/pinaculo_page_1.svg"
               alt="Referencia"
               className="absolute inset-0 w-full h-full object-contain pointer-events-none"
               style={{ opacity: bgOpacity }}
@@ -223,21 +234,23 @@ export function PinaculoDiagramEditor() {
           )}
 
           {/* Connections (dynamic from JSON) */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
-            {connections.map((c, idx) => {
-              const a = getPos(c.from)
-              const b = getPos(c.to)
-              const stroke = c.type === 'negative' ? '#EF4444' : c.type === 'base' ? '#9333EA' : '#3B82F6'
-              return (
-                <line key={idx}
-                  x1={`${a.x}%`} y1={`${a.y}%`}
-                  x2={`${b.x}%`} y2={`${b.y}%`}
-                  stroke={stroke} strokeWidth={2} />
-              )
-            })}
-          </svg>
+          {showConnections && (
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              {connections.map((c, idx) => {
+                const a = getPos(c.from)
+                const b = getPos(c.to)
+                const stroke = c.type === 'negative' ? '#EF4444' : c.type === 'base' ? '#9333EA' : '#3B82F6'
+                return (
+                  <line key={idx}
+                    x1={`${a.x}%`} y1={`${a.y}%`}
+                    x2={`${b.x}%`} y2={`${b.y}%`}
+                    stroke={stroke} strokeWidth={2} />
+                )
+              })}
+            </svg>
+          )}
 
-          {/* Nodes */}
+          {/* Nodes (no external names; just the letter for alignment guidance) */}
           {Object.values(nodes).map(n => (
             <div
               key={n.letter}
@@ -249,7 +262,6 @@ export function PinaculoDiagramEditor() {
                    style={{ backgroundColor: '#ffffffcc', borderColor: '#c4b5fd' }}>
                 <span className="font-bold text-lg text-gray-900">{n.letter}</span>
               </div>
-              <div className="text-center text-xs mt-1 text-gray-700">{n.name}</div>
             </div>
           ))}
         </div>
