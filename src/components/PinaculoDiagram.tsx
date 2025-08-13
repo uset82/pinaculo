@@ -176,22 +176,21 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const pos = (localPositions as any)[key]
               const val = (values as any)[key]
               if (typeof val === 'undefined') return null
-              // Force vertical alignment for central column: H,G,I,B,O,M,N,R share B's X
+              // Force vertical alignment for central column: H,G,I, B, O, M, N, R share B's X
               const centralKeys = ['H','G','I','B','O','M','N','R']
               const bx = (localPositions as any)['B']?.x ?? pos.x
-              // Alignment: (E,K,Q) share A's X; (F,C,L,S) share C's X
-              // New vertical axis: (J,D,X,Y) share D's X
-              const leftColumn = ['E','K','Q','W','P']
+              // Alignment: Leftmost vertical column uses A's X; Right column uses C's X
+              // Left column must include E, A, K, P, Q, W
+              const leftColumn = ['E','A','K','P','Q','W']
               const rightColumn = ['F','C','L','S']
-              const rightDXColumn = ['J','D','X','Y']
+              // Keep a short right vertical only for J and D (X/Y should not be forced to D's X to allow W T X Y horizontal row)
+              const rightDXColumn = ['J','D']
               const ax = (localPositions as any)['A']?.x ?? pos.x
               const cx = (localPositions as any)['C']?.x ?? pos.x
               const dx = (localPositions as any)['D']?.x ?? pos.x
-              // Pull side columns slightly toward the center (closer to B) to reduce the gap
-              // For left column keep near A but slightly outward for breathing room
-              const leftAdjustedX = Math.max(0, ax - 0.01)
-              // For F/C/L/S keep vertical on C and a little farther from the center (outward)
-              const rightAdjustedX = Math.min(1, cx + 0.02)
+              // Exact vertical alignment on the A-axis and C-axis
+              const leftAdjustedX = ax
+              const rightAdjustedX = cx
               const baseX = centralKeys.includes(key)
                 ? bx
                 : leftColumn.includes(key)
@@ -201,11 +200,26 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 : rightColumn.includes(key)
                 ? rightAdjustedX
                 : pos.x
-              // Align T vertically with R (center of Q-R-S row)
-              let adjBaseX = baseX
-              if (key === 'T') {
-                // Align T with the central vertical axis (same as R which uses B's X)
-                adjBaseX = bx
+              // Ensure T aligns with the central vertical axis (B's X)
+              let adjBaseX = key === 'T' ? bx : baseX
+              // Guarantee a minimum spacing between X and Y to avoid overlap on the WTXY row
+              if (key === 'X') {
+                const yX = (localPositions as any)['Y']?.x ?? pos.x
+                const currentX = (adjBaseX ?? pos.x)
+                const minSeparation = 0.06 // 6% of width
+                // Prefer X to sit a touch further left for visual breathing room
+                let desiredX = currentX - 0.03
+                // Ensure X is at least minSeparation to the left of Y
+                if (yX - desiredX < minSeparation) {
+                  desiredX = yX - minSeparation
+                }
+                adjBaseX = Math.max(0, desiredX)
+              }
+              // For Z (last row), center exactly between X and Y
+              if (key === 'Z') {
+                const xX = (localPositions as any)['X']?.x ?? pos.x
+                const xY = (localPositions as any)['Y']?.x ?? pos.x
+                adjBaseX = (xX + xY) / 2
               }
               const renderX = Math.min(1, Math.max(0, adjBaseX))
 
@@ -213,39 +227,49 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const iy = (localPositions as any)['I']?.y ?? pos.y
               const gy = (localPositions as any)['G']?.y ?? (iy - 0.08)
               const step = Math.abs(iy - gy) || 0.08
-              // Slightly larger gaps below I (between EIFJ -> ABCD) and below B (ABCD -> KOLX)
+              // Slightly larger gaps below I (between EIFJ -> ABCD) and below B (ABCD -> KOL)
               const gapAfterEIFJ = step * 1.18
               const gapAfterABCD = step * 1.22
               const yEIFJ = iy
               const yABCD = yEIFJ + gapAfterEIFJ
-              const yKOLX = yABCD + gapAfterABCD
-              const yWMY = yKOLX + step
-              const yPN = yWMY + step
+              const yKOL = yABCD + gapAfterABCD
+              const yM = yKOL + step
+              const yPN = yM + step
               const yQRS = yPN + step
+              // Place X and Y on a new row just below QRS, with Z further below
+              const yWTXY = yQRS + step
+              // Place Z just under X/Y as a distinct last row
+              const yZ = yWTXY + step
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
                 EIFJ: yEIFJ,
                 ABCD: yABCD,
-                KOLX: yKOLX,
-                WMY: yWMY,
+                KOL: yKOL,
+                M: yM,
                 PN: yPN,
                 QRS: yQRS,
+                WTXY: yWTXY,
+                Z: yZ,
               }
               const rowEIFJ = ['E','I','F','J']
               const rowABCD = ['A','B','C','D']
-              const rowKOLX = ['K','O','L','X']
-              const rowWMY = ['W','M','Y']
+              const rowKOL = ['K','O','L']
+              const rowM = ['M']
               const rowPN = ['P','N']
               const rowQRS = ['Q','R','S']
+              // Penultimate horizontal row contains W, T, X, Y aligned across
+              const rowWTXY = ['W','T','X','Y']
               let baseY = key === 'H' ? yRow.H
                 : key === 'G' ? yRow.G
                 : rowEIFJ.includes(key) ? yRow.EIFJ
                 : rowABCD.includes(key) ? yRow.ABCD
-                : rowKOLX.includes(key) ? yRow.KOLX
-                : rowWMY.includes(key) ? yRow.WMY
+                : rowKOL.includes(key) ? yRow.KOL
+                : rowM.includes(key) ? yRow.M
                 : rowPN.includes(key) ? yRow.PN
                 : rowQRS.includes(key) ? yRow.QRS
+                : rowWTXY.includes(key) ? yRow.WTXY
+                : key === 'Z' ? yRow.Z
                 : pos.y
               const left = `${renderX * 100}%`
               const top = `${baseY * 100}%`
