@@ -68,6 +68,22 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
   const [error, setError] = useState<string | null>(null)
   const isClient = useClientOnly()
 
+  // Helpers to convert between native <input type="date"> value (YYYY-MM-DD)
+  // and our internal DD/MM/YYYY string representation
+  const toIsoFromDmy = (dmy: string): string => {
+    if (!dmy || !/\d{1,2}\/\d{1,2}\/\d{4}/.test(dmy)) return ''
+    const [d, m, y] = dmy.split('/')
+    const dd = d.padStart(2, '0')
+    const mm = m.padStart(2, '0')
+    return `${y}-${mm}-${dd}`
+  }
+
+  const toDmyFromIso = (iso: string): string => {
+    if (!iso || !/\d{4}-\d{2}-\d{2}/.test(iso)) return ''
+    const [y, m, d] = iso.split('-')
+    return `${d}/${m}/${y}`
+  }
+
   const getNegativeAccentClasses = (key: string): string => {
     switch (key) {
       case 'K':
@@ -249,14 +265,22 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <p className="text-white/70 text-sm">
                 Tu nombre completo será analizado para revelar las energías numerológicas presentes.
               </p>
-              <input
-                type="text"
-                value={isPreviewMode ? previewData.birthDate : birthDate}
-                onChange={(e) => !isPreviewMode && setBirthDate(e.target.value)}
-                placeholder="06/05/1982"
-                className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
-                disabled={isPreviewMode}
-              />
+              {/* Better birthday input with native date picker + fallback formatting */}
+              <div className="flex gap-2 items-center">
+                <input
+                  type="date"
+                  aria-label="Fecha de nacimiento"
+                  value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
+                  onChange={(e) => {
+                    if (isPreviewMode) return
+                    const iso = e.target.value
+                    setBirthDate(toDmyFromIso(iso))
+                  }}
+                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                  disabled={isPreviewMode}
+                />
+              </div>
+              <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
               {error && (
                 <div className="bg-red-500/20 border border-red-500/40 text-red-200 px-4 py-3 rounded-lg text-sm">
                   {error}

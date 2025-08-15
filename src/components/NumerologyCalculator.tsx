@@ -70,6 +70,22 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
     await handleCalculate(false)
   }
 
+  // Helpers to convert between native <input type="date"> value (YYYY-MM-DD)
+  // and our internal DD/MM/YYYY string representation used across the app
+  const toIsoFromDmy = (dmy: string): string => {
+    if (!dmy || !/\d{1,2}\/\d{1,2}\/\d{4}/.test(dmy)) return ''
+    const [d, m, y] = dmy.split('/')
+    const dd = d.padStart(2, '0')
+    const mm = m.padStart(2, '0')
+    return `${y}-${mm}-${dd}`
+  }
+
+  const toDmyFromIso = (iso: string): string => {
+    if (!iso || !/\d{4}-\d{2}-\d{2}/.test(iso)) return ''
+    const [y, m, d] = iso.split('-')
+    return `${d}/${m}/${y}`
+  }
+
   if (!isClient) {
     return (
       <div className={`${isDraggableMode ? 'p-4' : 'min-h-screen'} bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center`}>
@@ -140,20 +156,18 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                 📅 Fecha de Nacimiento
               </label>
               <input
-                type="text"
+                type="date"
                 id="birthDate"
-                value={isPreviewMode ? previewData.birthDate : birthDate}
-                onChange={(e) => !isPreviewMode && setBirthDate(e.target.value)}
-                placeholder="06/05/1982"
+                aria-label="Fecha de nacimiento"
+                value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
+                onChange={(e) => !isPreviewMode && setBirthDate(toDmyFromIso(e.target.value))}
                 className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
                   isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
                 }`}
                 required
                 disabled={isPreviewMode}
               />
-              <p className="text-sm text-purple-600 mt-1">
-                Formato: DD/MM/YYYY (ejemplo: 06/05/1982)
-              </p>
+              <p className="text-sm text-purple-600 mt-1">Puedes usar el selector de fecha o escribir en formato DD/MM/YYYY.</p>
             </div>
 
             {error && (
