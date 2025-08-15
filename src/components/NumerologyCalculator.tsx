@@ -13,8 +13,15 @@ interface NumerologyCalculatorProps {
 export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = false }: NumerologyCalculatorProps) {
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
-  const [isDateMode, setIsDateMode] = useState(false)
   const dateInputRef = useRef<HTMLInputElement | null>(null)
+  const [useCustomPicker, setUseCustomPicker] = useState(false)
+  useEffect(() => {
+    try {
+      const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent)
+      const hasShowPicker = typeof (HTMLInputElement.prototype as any).showPicker === 'function'
+      if (isIOS || !hasShowPicker) setUseCustomPicker(true)
+    } catch {}
+  }, [])
   const [result, setResult] = useState<any | null>(null)
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -156,44 +163,69 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
             <div>
               <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
               <div className="relative">
-                <input
-                  type={isDateMode ? 'date' : 'text'}
-                  id="birthDate"
-                  aria-label="Fecha de nacimiento"
-                  placeholder={isDateMode ? undefined : 'DÍA MES AÑO'}
-                  value={isPreviewMode
-                    ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : previewData.birthDate)
-                    : (isDateMode ? toIsoFromDmy(birthDate) : birthDate)}
-                  ref={dateInputRef}
-                  onFocus={() => {
-                    if (isPreviewMode) return
-                    setIsDateMode(true)
-                    requestAnimationFrame(() => {
-                      const el = dateInputRef.current
-                      if (!el) return
-                      if (typeof (el as any).showPicker === 'function') {
-                        ;(el as any).showPicker()
-                      } else {
-                        el.click()
+                {useCustomPicker ? (
+                  <div className="w-full px-3 py-2 bg-white text-black rounded-lg border-2 border-purple-300 flex gap-2">
+                    {(() => {
+                      const [d, m, y] = (isPreviewMode ? previewData.birthDate : birthDate || '').split('/')
+                      const day = parseInt(d || '0') || 0
+                      const month = parseInt(m || '0') || 0
+                      const year = parseInt(y || '0') || 0
+                      const set = (nd?: number, nm?: number, ny?: number) => {
+                        const dd = (nd ?? day) || 0
+                        const mm = (nm ?? month) || 0
+                        const yy = (ny ?? year) || 0
+                        if (!isPreviewMode) {
+                          if (dd && mm && yy) setBirthDate(`${String(dd).padStart(2,'0')}/${String(mm).padStart(2,'0')}/${yy}`)
+                          else setBirthDate('')
+                        }
                       }
-                    })
-                  }}
-                  onBlur={() => {
-                    if (!birthDate) setIsDateMode(false)
-                  }}
-                  onChange={(e) => {
-                    if (isPreviewMode) return
-                    if (isDateMode) setBirthDate(toDmyFromIso(e.target.value))
-                    else setBirthDate(e.target.value)
-                  }}
-                  min={isDateMode ? '1900-01-01' : undefined}
-                  max={isDateMode ? '2100-12-31' : undefined}
-                  className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium placeholder-gray-600 ${
-                    isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
-                  }`}
-                  required
-                  disabled={isPreviewMode}
-                />
+                      const years: number[] = []
+                      const current = new Date().getFullYear()
+                      for (let yr = current; yr >= 1900; yr--) years.push(yr)
+                      return (
+                        <>
+                          <select aria-label="Día" className="flex-1 bg-transparent" value={day || ''} disabled={isPreviewMode} onChange={(e) => set(parseInt(e.target.value)||0, undefined, undefined)}>
+                            <option value="">DÍA</option>
+                            {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
+                              <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
+                            ))}
+                          </select>
+                          <select aria-label="Mes" className="flex-1 bg-transparent" value={month || ''} disabled={isPreviewMode} onChange={(e) => set(undefined, parseInt(e.target.value)||0, undefined)}>
+                            <option value="">MES</option>
+                            {Array.from({ length: 12 }, (_, i) => i + 1).map(n => (
+                              <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
+                            ))}
+                          </select>
+                          <select aria-label="Año" className="flex-[1.2] bg-transparent" value={year || ''} disabled={isPreviewMode} onChange={(e) => set(undefined, undefined, parseInt(e.target.value)||0)}>
+                            <option value="">AÑO</option>
+                            {years.map(yr => (<option key={yr} value={yr}>{yr}</option>))}
+                          </select>
+                        </>
+                      )
+                    })()}
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="date"
+                      id="birthDate"
+                      ref={dateInputRef}
+                      aria-label="Fecha de nacimiento"
+                      value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
+                      onChange={(e) => !isPreviewMode && setBirthDate(toDmyFromIso(e.target.value))}
+                      min="1900-01-01"
+                      max="2100-12-31"
+                      className={`relative z-10 w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
+                        isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
+                      }`}
+                      required
+                      disabled={isPreviewMode}
+                    />
+                    {!birthDate && !isPreviewMode && (
+                      <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-600 text-sm z-20">DÍA MES AÑO</span>
+                    )}
+                  </>
+                )}
               </div>
               <p className="text-sm text-purple-600 mt-1">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
             </div>
