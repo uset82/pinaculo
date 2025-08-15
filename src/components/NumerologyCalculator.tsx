@@ -170,20 +170,20 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
               <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
               <div className="relative">
                 {useCustomPicker ? (
-                  <div className="w-full px-3 py-2 bg-white text-black rounded-lg border-2 border-purple-300 flex gap-2">
-                    <select aria-label="Día" className="flex-1 bg-transparent" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
+                  <div className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border-2 border-purple-300 rounded-lg text-black focus-within:ring-2 focus-within:ring-purple-500 transition-all flex gap-3">
+                    <select aria-label="Día" className="flex-1 bg-transparent text-black text-lg outline-none appearance-none" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
                       <option value="">DÍA</option>
                       {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
                         <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
                       ))}
                     </select>
-                    <select aria-label="Mes" className="flex-1 bg-transparent" value={month || ''} disabled={isPreviewMode} onChange={(e) => setMonth(parseInt(e.target.value) || '')}>
+                    <select aria-label="Mes" className="flex-1 bg-transparent text-black text-lg outline-none appearance-none" value={month || ''} disabled={isPreviewMode} onChange={(e) => setMonth(parseInt(e.target.value) || '')}>
                       <option value="">MES</option>
                       {Array.from({ length: 12 }, (_, i) => i + 1).map(n => (
                         <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
                       ))}
                     </select>
-                    <select aria-label="Año" className="flex-[1.2] bg-transparent" value={year || ''} disabled={isPreviewMode} onChange={(e) => setYear(parseInt(e.target.value) || '')}>
+                    <select aria-label="Año" className="flex-[1.2] bg-transparent text-black text-lg outline-none appearance-none" value={year || ''} disabled={isPreviewMode} onChange={(e) => setYear(parseInt(e.target.value) || '')}>
                       <option value="">AÑO</option>
                       {(() => {
                         const years: number[] = []
