@@ -268,9 +268,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               {/* Better birthday input with native date picker + fallback formatting */}
               <label htmlFor="birthDateLg" className="block text-white/80 text-sm mb-1">📅 Fecha de Nacimiento</label>
               <div className="relative">
-                {/* Placeholder overlay for empty state (type=date doesn't support placeholder) */}
+                {/* Inline hint inside the box so users know where to click */}
                 {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-sm">DD/MM/YYYY</span>
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70 text-sm">📅 Fecha de Nacimiento</span>
                 )}
                 <input
                   id="birthDateLg"
