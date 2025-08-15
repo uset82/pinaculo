@@ -258,13 +258,18 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 type="text" 
                 value={isPreviewMode ? previewData.name : name}
                 onChange={(e) => !isPreviewMode && setName(e.target.value)}
-                placeholder="Ej: CARLOS CARPIO"
+                placeholder="Escriba aquí"
                 className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                 disabled={isPreviewMode}
               />
               <p className="text-white/70 text-sm">
                 Tu nombre completo será analizado para revelar las energías numerológicas presentes.
               </p>
+              {/* 2. Fecha de Nacimiento */}
+              <div className="pt-2">
+                <div className="text-white/90 font-bold mb-2">2. Fecha de Nacimiento</div>
+              </div>
+
               {/* Better birthday input with native date picker + fallback formatting */}
               <div className="flex gap-2 items-center">
                 <div className="relative w-full">
@@ -281,7 +286,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/60 text-base">
                       Día / mes / año
                     </span>
                   )}
