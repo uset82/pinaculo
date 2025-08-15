@@ -162,14 +162,14 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                 onChange={(e) => !isPreviewMode && setBirthDate(toDmyFromIso(e.target.value))}
                 min="1900-01-01"
                 max="2100-12-31"
-                className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
+                className={`relative z-0 w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
                   isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
                 }`}
                 required
                 disabled={isPreviewMode}
               />
               {!isPreviewMode && !birthDate && (
-                <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-600 text-sm z-10">DÍA MES AÑO</span>
+                <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-800 text-sm z-20">DÍA MES AÑO</span>
               )}
               </div>
               <p className="text-sm text-purple-600 mt-1">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>

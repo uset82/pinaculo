@@ -280,12 +280,12 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   }}
                   min="1900-01-01"
                   max="2100-12-31"
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                  className="relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                   disabled={isPreviewMode}
                 />
                 {/* Inline hint inside the box so users know where to click */}
                 {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-white/80 text-sm z-10">DÍA MES AÑO</span>
+                  <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-white/90 text-sm z-20">DÍA MES AÑO</span>
                 )}
               </div>
               <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
