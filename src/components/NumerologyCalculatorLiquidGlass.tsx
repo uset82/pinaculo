@@ -281,7 +281,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/60 text-sm">
+                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
                       Día / mes / año
                     </span>
                   )}
