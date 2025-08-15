@@ -266,14 +266,8 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 Tu nombre completo será analizado para revelar las energías numerológicas presentes.
               </p>
               {/* Better birthday input with native date picker + fallback formatting */}
-              <label htmlFor="birthDateLg" className="block text-white/80 text-sm mb-1">📅 Fecha de Nacimiento</label>
-              <div className="relative">
-                {/* Placeholder overlay for empty state (type=date doesn't support placeholder) */}
-                {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-sm">DD/MM/YYYY</span>
-                )}
+              <div className="flex gap-2 items-center">
                 <input
-                  id="birthDateLg"
                   type="date"
                   aria-label="Fecha de nacimiento"
                   value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
@@ -282,8 +276,6 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     const iso = e.target.value
                     setBirthDate(toDmyFromIso(iso))
                   }}
-                  min="1900-01-01"
-                  max="2100-12-31"
                   className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                   disabled={isPreviewMode}
                 />

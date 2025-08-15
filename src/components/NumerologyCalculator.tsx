@@ -152,27 +152,22 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
             </div>
 
             <div>
-              <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
-              <div className="relative">
-              {!isPreviewMode && !birthDate && (
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">DD/MM/YYYY</span>
-              )}
+              <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">
+                📅 Fecha de Nacimiento
+              </label>
               <input
                 type="date"
                 id="birthDate"
                 aria-label="Fecha de nacimiento"
                 value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
                 onChange={(e) => !isPreviewMode && setBirthDate(toDmyFromIso(e.target.value))}
-                min="1900-01-01"
-                max="2100-12-31"
                 className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
                   isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
                 }`}
                 required
                 disabled={isPreviewMode}
               />
-              </div>
-              <p className="text-sm text-purple-600 mt-1">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
+              <p className="text-sm text-purple-600 mt-1">Puedes usar el selector de fecha o escribir en formato DD/MM/YYYY.</p>
             </div>
 
             {error && (
