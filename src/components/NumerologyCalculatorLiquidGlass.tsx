@@ -288,7 +288,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   }}
                   min={isDateMode ? '1900-01-01' : undefined}
                   max={isDateMode ? '2100-12-31' : undefined}
-                  className="w-full px-4 py-3 bg-white text-black rounded-xl border border-white/20 focus:border-white/40 transition-all"
+                  className="w-full px-4 py-3 bg-white text-black placeholder-gray-700 rounded-xl border border-white/20 focus:border-white/40 transition-all"
                   disabled={isPreviewMode}
                 />
               </div>

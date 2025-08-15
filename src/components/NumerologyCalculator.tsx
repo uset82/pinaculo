@@ -166,7 +166,7 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                   onChange={(e) => !isPreviewMode && isDateMode && setBirthDate(toDmyFromIso(e.target.value))}
                   min={isDateMode ? '1900-01-01' : undefined}
                   max={isDateMode ? '2100-12-31' : undefined}
-                  className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
+                  className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium placeholder-gray-600 ${
                     isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
                   }`}
                   required
