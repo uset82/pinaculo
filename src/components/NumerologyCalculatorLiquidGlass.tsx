@@ -282,7 +282,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     const iso = e.target.value
                     setBirthDate(toDmyFromIso(iso))
                   }}
-                  className="relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none"
+                  className={`relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none caret-black ${!birthDate ? 'date-empty' : ''}`}
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
