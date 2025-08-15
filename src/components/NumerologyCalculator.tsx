@@ -13,6 +13,7 @@ interface NumerologyCalculatorProps {
 export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = false }: NumerologyCalculatorProps) {
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
+  const [isDateMode, setIsDateMode] = useState(false)
   const [result, setResult] = useState<any | null>(null)
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -154,23 +155,23 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
             <div>
               <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
               <div className="relative">
-              <input
-                type="date"
-                id="birthDate"
-                aria-label="Fecha de nacimiento"
-                value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
-                onChange={(e) => !isPreviewMode && setBirthDate(toDmyFromIso(e.target.value))}
-                min="1900-01-01"
-                max="2100-12-31"
-                className={`relative z-0 w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
-                  isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
-                }`}
-                required
-                disabled={isPreviewMode}
-              />
-              {!isPreviewMode && !birthDate && (
-                <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-800 text-sm z-20">DÍA MES AÑO</span>
-              )}
+                <input
+                  type={isDateMode ? 'date' : 'text'}
+                  id="birthDate"
+                  aria-label="Fecha de nacimiento"
+                  placeholder={isDateMode ? undefined : 'DÍA MES AÑO'}
+                  value={isPreviewMode ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : '') : (isDateMode ? toIsoFromDmy(birthDate) : '')}
+                  onFocus={() => !isPreviewMode && setIsDateMode(true)}
+                  onBlur={() => { if (!birthDate) setIsDateMode(false) }}
+                  onChange={(e) => !isPreviewMode && isDateMode && setBirthDate(toDmyFromIso(e.target.value))}
+                  min={isDateMode ? '1900-01-01' : undefined}
+                  max={isDateMode ? '2100-12-31' : undefined}
+                  className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium ${
+                    isPreviewMode ? 'bg-gray-100 text-gray-700 cursor-not-allowed' : 'bg-white text-black'
+                  }`}
+                  required
+                  disabled={isPreviewMode}
+                />
               </div>
               <p className="text-sm text-purple-600 mt-1">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
             </div>

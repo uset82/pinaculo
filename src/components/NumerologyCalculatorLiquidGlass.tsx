@@ -67,6 +67,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const isClient = useClientOnly()
+  const [isDateMode, setIsDateMode] = useState(false)
 
   // Helpers to convert between native <input type="date"> value (YYYY-MM-DD)
   // and our internal DD/MM/YYYY string representation
@@ -270,23 +271,26 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <div className="relative">
                 <input
                   id="birthDateLg"
-                  type="date"
+                  type={isDateMode ? 'date' : 'text'}
                   aria-label="Fecha de nacimiento"
-                  value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
+                  placeholder={isDateMode ? undefined : 'DÍA MES AÑO'}
+                  value={isPreviewMode ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : '') : (isDateMode ? toIsoFromDmy(birthDate) : '')}
+                  onFocus={() => !isPreviewMode && setIsDateMode(true)}
+                  onBlur={(e) => {
+                    if (isPreviewMode) return
+                    if (!birthDate) setIsDateMode(false)
+                  }}
                   onChange={(e) => {
                     if (isPreviewMode) return
-                    const iso = e.target.value
-                    setBirthDate(toDmyFromIso(iso))
+                    if (isDateMode) {
+                      setBirthDate(toDmyFromIso(e.target.value))
+                    }
                   }}
-                  min="1900-01-01"
-                  max="2100-12-31"
-                  className="relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                  min={isDateMode ? '1900-01-01' : undefined}
+                  max={isDateMode ? '2100-12-31' : undefined}
+                  className="w-full px-4 py-3 bg-white text-black rounded-xl border border-white/20 focus:border-white/40 transition-all"
                   disabled={isPreviewMode}
                 />
-                {/* Inline hint inside the box so users know where to click */}
-                {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-white/90 text-sm z-20">DÍA MES AÑO</span>
-                )}
               </div>
               <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
               {error && (
