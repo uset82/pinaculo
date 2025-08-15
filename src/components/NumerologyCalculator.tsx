@@ -14,14 +14,20 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const dateInputRef = useRef<HTMLInputElement | null>(null)
-  const [useCustomPicker, setUseCustomPicker] = useState(false)
+  const [useCustomPicker, setUseCustomPicker] = useState(true)
+  const [day, setDay] = useState<number | ''>('')
+  const [month, setMonth] = useState<number | ''>('')
+  const [year, setYear] = useState<number | ''>('')
   useEffect(() => {
-    try {
-      const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent)
-      const hasShowPicker = typeof (HTMLInputElement.prototype as any).showPicker === 'function'
-      if (isIOS || !hasShowPicker) setUseCustomPicker(true)
-    } catch {}
-  }, [])
+    if (day && month && year) {
+      const dd = String(day).padStart(2, '0')
+      const mm = String(month).padStart(2, '0')
+      const yy = String(year)
+      if (!isPreviewMode) setBirthDate(`${dd}/${mm}/${yy}`)
+    } else {
+      if (!isPreviewMode) setBirthDate('')
+    }
+  }, [day, month, year])
   const [result, setResult] = useState<any | null>(null)
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -165,44 +171,27 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
               <div className="relative">
                 {useCustomPicker ? (
                   <div className="w-full px-3 py-2 bg-white text-black rounded-lg border-2 border-purple-300 flex gap-2">
-                    {(() => {
-                      const [d, m, y] = (isPreviewMode ? previewData.birthDate : birthDate || '').split('/')
-                      const day = parseInt(d || '0') || 0
-                      const month = parseInt(m || '0') || 0
-                      const year = parseInt(y || '0') || 0
-                      const set = (nd?: number, nm?: number, ny?: number) => {
-                        const dd = (nd ?? day) || 0
-                        const mm = (nm ?? month) || 0
-                        const yy = (ny ?? year) || 0
-                        if (!isPreviewMode) {
-                          if (dd && mm && yy) setBirthDate(`${String(dd).padStart(2,'0')}/${String(mm).padStart(2,'0')}/${yy}`)
-                          else setBirthDate('')
-                        }
-                      }
-                      const years: number[] = []
-                      const current = new Date().getFullYear()
-                      for (let yr = current; yr >= 1900; yr--) years.push(yr)
-                      return (
-                        <>
-                          <select aria-label="Día" className="flex-1 bg-transparent" value={day || ''} disabled={isPreviewMode} onChange={(e) => set(parseInt(e.target.value)||0, undefined, undefined)}>
-                            <option value="">DÍA</option>
-                            {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
-                              <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
-                            ))}
-                          </select>
-                          <select aria-label="Mes" className="flex-1 bg-transparent" value={month || ''} disabled={isPreviewMode} onChange={(e) => set(undefined, parseInt(e.target.value)||0, undefined)}>
-                            <option value="">MES</option>
-                            {Array.from({ length: 12 }, (_, i) => i + 1).map(n => (
-                              <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
-                            ))}
-                          </select>
-                          <select aria-label="Año" className="flex-[1.2] bg-transparent" value={year || ''} disabled={isPreviewMode} onChange={(e) => set(undefined, undefined, parseInt(e.target.value)||0)}>
-                            <option value="">AÑO</option>
-                            {years.map(yr => (<option key={yr} value={yr}>{yr}</option>))}
-                          </select>
-                        </>
-                      )
-                    })()}
+                    <select aria-label="Día" className="flex-1 bg-transparent" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
+                      <option value="">DÍA</option>
+                      {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
+                        <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
+                      ))}
+                    </select>
+                    <select aria-label="Mes" className="flex-1 bg-transparent" value={month || ''} disabled={isPreviewMode} onChange={(e) => setMonth(parseInt(e.target.value) || '')}>
+                      <option value="">MES</option>
+                      {Array.from({ length: 12 }, (_, i) => i + 1).map(n => (
+                        <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
+                      ))}
+                    </select>
+                    <select aria-label="Año" className="flex-[1.2] bg-transparent" value={year || ''} disabled={isPreviewMode} onChange={(e) => setYear(parseInt(e.target.value) || '')}>
+                      <option value="">AÑO</option>
+                      {(() => {
+                        const years: number[] = []
+                        const current = new Date().getFullYear()
+                        for (let yr = current; yr >= 1900; yr--) years.push(yr)
+                        return years.map(yr => (<option key={yr} value={yr}>{yr}</option>))
+                      })()}
+                    </select>
                   </div>
                 ) : (
                   <>
