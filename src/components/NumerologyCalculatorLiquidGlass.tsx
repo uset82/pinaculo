@@ -282,11 +282,11 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     const iso = e.target.value
                     setBirthDate(toDmyFromIso(iso))
                   }}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                  className="relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white text-lg font-semibold">
+                    <span className="pointer-events-none absolute z-10 left-4 top-1/2 -translate-y-1/2 text-white text-lg font-semibold">
                       Día / mes / año
                     </span>
                   )}
