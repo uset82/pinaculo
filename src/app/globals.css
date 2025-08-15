@@ -61,8 +61,10 @@ input[type="date"] {
   background-color: #ffffff !important;
   color: #000000 !important;
   border: 2px solid #d1d5db !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 16px !important; /* Prevents zoom on iOS */
+  line-height: 1 !important;
+  height: 48px !important; /* 12 * 4px = h-12 for consistent box height */
   -webkit-appearance: none !important;
   appearance: none !important;
 }

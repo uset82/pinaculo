@@ -259,7 +259,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 value={isPreviewMode ? previewData.name : name}
                 onChange={(e) => !isPreviewMode && setName(e.target.value)}
                 placeholder="Escriba aquí"
-                className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                className="w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-black placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all text-base font-semibold"
                 disabled={isPreviewMode}
               />
               <p className="text-white/70 text-sm">
@@ -282,11 +282,11 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     const iso = e.target.value
                     setBirthDate(toDmyFromIso(iso))
                   }}
-                  className={`relative z-0 w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none caret-black ${!birthDate ? 'date-empty' : ''}`}
+                  className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute z-10 left-4 top-1/2 -translate-y-1/2 text-black text-lg font-semibold">
+                    <span className="pointer-events-none absolute z-10 left-4 top-1/2 -translate-y-1/2 text-black text-base font-semibold leading-none">
                       Día / mes / año
                     </span>
                   )}
