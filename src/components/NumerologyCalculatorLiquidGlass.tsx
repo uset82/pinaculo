@@ -270,7 +270,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <div className="relative">
                 {/* Inline hint inside the box so users know where to click */}
                 {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70 text-sm">DIA MES ANO</span>
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70 text-sm">DÍA MES AÑO</span>
                 )}
                 <input
                   id="birthDateLg"
