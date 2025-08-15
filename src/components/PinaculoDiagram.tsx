@@ -191,6 +191,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               // Exact vertical alignment on the A-axis and C-axis
               const leftAdjustedX = ax
               const rightAdjustedX = cx
+              const rightOffset = 0.04 // slight nudge to the right for the right column
               const baseX = centralKeys.includes(key)
                 ? bx
                 : leftColumn.includes(key)
@@ -198,7 +199,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 : rightDXColumn.includes(key)
                 ? dx
                 : rightColumn.includes(key)
-                ? rightAdjustedX
+                ? rightAdjustedX + rightOffset
                 : pos.x
               // Ensure T (and Y via centralKeys) aligns with the central vertical axis (B's X)
               let adjBaseX = key === 'T' ? bx : baseX
