@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
 import PinaculoDiagram from './PinaculoDiagram'
 import { PinaculoCalculator } from '@/types/pinaculo'
@@ -67,23 +67,6 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const isClient = useClientOnly()
-  const dateInputRef = useRef<HTMLInputElement | null>(null)
-  const [useCustomPicker, setUseCustomPicker] = useState(true)
-  const [day, setDay] = useState<number | ''>('')
-  const [month, setMonth] = useState<number | ''>('')
-  const [year, setYear] = useState<number | ''>('')
-
-  // Keep selects and birthDate in sync
-  useEffect(() => {
-    if (day && month && year) {
-      const dd = String(day).padStart(2, '0')
-      const mm = String(month).padStart(2, '0')
-      const yy = String(year)
-      if (!isPreviewMode) setBirthDate(`${dd}/${mm}/${yy}`)
-    } else {
-      if (!isPreviewMode) setBirthDate('')
-    }
-  }, [day, month, year])
 
   // Helpers to convert between native <input type="date"> value (YYYY-MM-DD)
   // and our internal DD/MM/YYYY string representation
@@ -285,49 +268,25 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               {/* Better birthday input with native date picker + fallback formatting */}
               <label htmlFor="birthDateLg" className="block text-white/80 text-sm mb-1">📅 Fecha de Nacimiento</label>
               <div className="relative">
-                {useCustomPicker ? (
-                  <div className="w-full px-4 py-3 bg-white text-black border border-white/20 rounded-xl focus-within:border-white/40 transition-all flex gap-3">
-                    <select aria-label="Día" className="flex-1 bg-transparent text-white text-base outline-none appearance-none" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
-                      <option value="">DÍA</option>
-                      {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
-                        <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
-                      ))}
-                    </select>
-                    <select aria-label="Mes" className="flex-1 bg-transparent text-white text-base outline-none appearance-none" value={month || ''} disabled={isPreviewMode} onChange={(e) => setMonth(parseInt(e.target.value) || '')}>
-                      <option value="">MES</option>
-                      {Array.from({ length: 12 }, (_, i) => i + 1).map(n => (
-                        <option key={n} value={n}>{String(n).padStart(2,'0')}</option>
-                      ))}
-                    </select>
-                    <select aria-label="Año" className="flex-[1.2] bg-transparent text-white text-base outline-none appearance-none" value={year || ''} disabled={isPreviewMode} onChange={(e) => setYear(parseInt(e.target.value) || '')}>
-                      <option value="">AÑO</option>
-                      {(() => {
-                        const years: number[] = []
-                        const current = new Date().getFullYear()
-                        for (let yr = current; yr >= 1900; yr--) years.push(yr)
-                        return years.map(yr => (<option key={yr} value={yr}>{yr}</option>))
-                      })()}
-                    </select>
-                  </div>
-                ) : (
-                  <>
-                    <input
-                      id="birthDateLg"
-                      ref={dateInputRef}
-                      type="date"
-                      aria-label="Fecha de nacimiento"
-                      value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
-                      onChange={(e) => { if (!isPreviewMode) setBirthDate(toDmyFromIso(e.target.value)) }}
-                      min="1900-01-01"
-                      max="2100-12-31"
-                      className="relative z-10 w-full px-4 py-3 bg-white text-black rounded-xl border border-white/20 focus:border-white/40 transition-all"
-                      disabled={isPreviewMode}
-                    />
-                    {!birthDate && !isPreviewMode && (
-                      <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-700 text-sm z-20">DÍA MES AÑO</span>
-                    )}
-                  </>
+                {/* Placeholder overlay for empty state (type=date doesn't support placeholder) */}
+                {!isPreviewMode && !birthDate && (
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-sm">DD/MM/YYYY</span>
                 )}
+                <input
+                  id="birthDateLg"
+                  type="date"
+                  aria-label="Fecha de nacimiento"
+                  value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
+                  onChange={(e) => {
+                    if (isPreviewMode) return
+                    const iso = e.target.value
+                    setBirthDate(toDmyFromIso(iso))
+                  }}
+                  min="1900-01-01"
+                  max="2100-12-31"
+                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
+                  disabled={isPreviewMode}
+                />
               </div>
               <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
               {error && (
