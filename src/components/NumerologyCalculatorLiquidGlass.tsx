@@ -286,13 +286,13 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   disabled={isPreviewMode}
                 />
                   {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/60 text-base">
+                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white text-lg font-semibold">
                       Día / mes / año
                     </span>
                   )}
                 </div>
               </div>
-              <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
+              {/* Removed helper text per request */}
               {error && (
                 <div className="bg-red-500/20 border border-red-500/40 text-red-200 px-4 py-3 rounded-lg text-sm">
                   {error}
