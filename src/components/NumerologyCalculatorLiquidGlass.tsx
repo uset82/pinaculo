@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
 import PinaculoDiagram from './PinaculoDiagram'
 import { PinaculoCalculator } from '@/types/pinaculo'
@@ -68,6 +68,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
   const [error, setError] = useState<string | null>(null)
   const isClient = useClientOnly()
   const [isDateMode, setIsDateMode] = useState(false)
+  const dateInputRef = useRef<HTMLInputElement | null>(null)
 
   // Helpers to convert between native <input type="date"> value (YYYY-MM-DD)
   // and our internal DD/MM/YYYY string representation
@@ -274,17 +275,33 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   type={isDateMode ? 'date' : 'text'}
                   aria-label="Fecha de nacimiento"
                   placeholder={isDateMode ? undefined : 'DÍA MES AÑO'}
-                  value={isPreviewMode ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : '') : (isDateMode ? toIsoFromDmy(birthDate) : '')}
-                  onFocus={() => !isPreviewMode && setIsDateMode(true)}
-                  onBlur={(e) => {
+                  value={isPreviewMode
+                    ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : previewData.birthDate)
+                    : (isDateMode ? toIsoFromDmy(birthDate) : birthDate)}
+                  ref={dateInputRef}
+                  onFocus={() => {
                     if (isPreviewMode) return
-                    if (!birthDate) setIsDateMode(false)
+                    setIsDateMode(true)
+                    // Open native picker asap
+                    requestAnimationFrame(() => {
+                      const el = dateInputRef.current
+                      if (!el) return
+                      if (typeof (el as any).showPicker === 'function') {
+                        ;(el as any).showPicker()
+                      } else {
+                        el.click()
+                      }
+                    })
+                  }}
+                  onBlur={() => {
+                    if (isPreviewMode) return
+                    // Always return to text mode to display DD/MM/YYYY value
+                    setIsDateMode(false)
                   }}
                   onChange={(e) => {
                     if (isPreviewMode) return
-                    if (isDateMode) {
-                      setBirthDate(toDmyFromIso(e.target.value))
-                    }
+                    if (isDateMode) setBirthDate(toDmyFromIso(e.target.value))
+                    else setBirthDate(e.target.value)
                   }}
                   min={isDateMode ? '1900-01-01' : undefined}
                   max={isDateMode ? '2100-12-31' : undefined}

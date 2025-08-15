@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
 // Limpieza: no usamos agentes; cálculo local
 import PinaculoDiagram from './PinaculoDiagram'
@@ -14,6 +14,7 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [isDateMode, setIsDateMode] = useState(false)
+  const dateInputRef = useRef<HTMLInputElement | null>(null)
   const [result, setResult] = useState<any | null>(null)
   const [calculating, setCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -160,10 +161,31 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                   id="birthDate"
                   aria-label="Fecha de nacimiento"
                   placeholder={isDateMode ? undefined : 'DÍA MES AÑO'}
-                  value={isPreviewMode ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : '') : (isDateMode ? toIsoFromDmy(birthDate) : '')}
-                  onFocus={() => !isPreviewMode && setIsDateMode(true)}
-                  onBlur={() => { if (!birthDate) setIsDateMode(false) }}
-                  onChange={(e) => !isPreviewMode && isDateMode && setBirthDate(toDmyFromIso(e.target.value))}
+                  value={isPreviewMode
+                    ? (isDateMode ? toIsoFromDmy(previewData.birthDate) : previewData.birthDate)
+                    : (isDateMode ? toIsoFromDmy(birthDate) : birthDate)}
+                  ref={dateInputRef}
+                  onFocus={() => {
+                    if (isPreviewMode) return
+                    setIsDateMode(true)
+                    requestAnimationFrame(() => {
+                      const el = dateInputRef.current
+                      if (!el) return
+                      if (typeof (el as any).showPicker === 'function') {
+                        ;(el as any).showPicker()
+                      } else {
+                        el.click()
+                      }
+                    })
+                  }}
+                  onBlur={() => {
+                    if (!birthDate) setIsDateMode(false)
+                  }}
+                  onChange={(e) => {
+                    if (isPreviewMode) return
+                    if (isDateMode) setBirthDate(toDmyFromIso(e.target.value))
+                    else setBirthDate(e.target.value)
+                  }}
                   min={isDateMode ? '1900-01-01' : undefined}
                   max={isDateMode ? '2100-12-31' : undefined}
                   className={`w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-medium placeholder-gray-600 ${
