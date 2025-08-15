@@ -267,7 +267,8 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               </p>
               {/* Better birthday input with native date picker + fallback formatting */}
               <div className="flex gap-2 items-center">
-                <input
+                <div className="relative w-full">
+                  <input
                   type="date"
                   aria-label="Fecha de nacimiento"
                   value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
@@ -279,6 +280,12 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                   disabled={isPreviewMode}
                 />
+                  {!isPreviewMode && !birthDate && (
+                    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/60 text-sm">
+                      Día / mes / año
+                    </span>
+                  )}
+                </div>
               </div>
               <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
               {error && (
