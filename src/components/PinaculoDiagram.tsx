@@ -177,12 +177,12 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const val = (values as any)[key]
               if (typeof val === 'undefined') return null
               // Force vertical alignment for central column: H,G,I, B, O, M, N, R share B's X
-              const centralKeys = ['H','G','I','B','O','M','N','R']
+              const centralKeys = ['H','G','I','B','O','M','N','R','T','Y']
               const bx = (localPositions as any)['B']?.x ?? pos.x
               // Alignment: Leftmost vertical column uses A's X; Right column uses C's X
               // Left column must include E, A, K, P, Q, W
-              const leftColumn = ['E','A','K','P','Q','W']
-              const rightColumn = ['F','C','L','S']
+              const leftColumn = ['E','A','K','P','Q','W','X']
+              const rightColumn = ['F','C','L','S','Z']
               // Keep a short right vertical only for J and D (X/Y should not be forced to D's X to allow W T X Y horizontal row)
               const rightDXColumn = ['J','D']
               const ax = (localPositions as any)['A']?.x ?? pos.x
@@ -200,27 +200,8 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 : rightColumn.includes(key)
                 ? rightAdjustedX
                 : pos.x
-              // Ensure T aligns with the central vertical axis (B's X)
+              // Ensure T (and Y via centralKeys) aligns with the central vertical axis (B's X)
               let adjBaseX = key === 'T' ? bx : baseX
-              // Guarantee a minimum spacing between X and Y to avoid overlap on the WTXY row
-              if (key === 'X') {
-                const yX = (localPositions as any)['Y']?.x ?? pos.x
-                const currentX = (adjBaseX ?? pos.x)
-                const minSeparation = 0.06 // 6% of width
-                // Prefer X to sit a touch further left for visual breathing room
-                let desiredX = currentX - 0.03
-                // Ensure X is at least minSeparation to the left of Y
-                if (yX - desiredX < minSeparation) {
-                  desiredX = yX - minSeparation
-                }
-                adjBaseX = Math.max(0, desiredX)
-              }
-              // For Z (last row), center exactly between X and Y
-              if (key === 'Z') {
-                const xX = (localPositions as any)['X']?.x ?? pos.x
-                const xY = (localPositions as any)['Y']?.x ?? pos.x
-                adjBaseX = (xX + xY) / 2
-              }
               const renderX = Math.min(1, Math.max(0, adjBaseX))
 
               // Horizontal alignment by rows
@@ -236,10 +217,9 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yM = yKOL + step
               const yPN = yM + step
               const yQRS = yPN + step
-              // Place X and Y on a new row just below QRS, with Z further below
-              const yWTXY = yQRS + step
-              // Place Z just under X/Y as a distinct last row
-              const yZ = yWTXY + step
+              // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
+              const yWT = yQRS + step
+              const yXYZ = yWT + step
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
@@ -249,8 +229,8 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 M: yM,
                 PN: yPN,
                 QRS: yQRS,
-                WTXY: yWTXY,
-                Z: yZ,
+                WT: yWT,
+                XYZ: yXYZ,
               }
               const rowEIFJ = ['E','I','F','J']
               const rowABCD = ['A','B','C','D']
@@ -258,8 +238,9 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const rowM = ['M']
               const rowPN = ['P','N']
               const rowQRS = ['Q','R','S']
-              // Penultimate horizontal row contains W, T, X, Y aligned across
-              const rowWTXY = ['W','T','X','Y']
+              // Penultimate horizontal row contains W, T; last row contains X, Y, Z aligned across
+              const rowWT = ['W','T']
+              const rowXYZ = ['X','Y','Z']
               let baseY = key === 'H' ? yRow.H
                 : key === 'G' ? yRow.G
                 : rowEIFJ.includes(key) ? yRow.EIFJ
@@ -268,22 +249,22 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 : rowM.includes(key) ? yRow.M
                 : rowPN.includes(key) ? yRow.PN
                 : rowQRS.includes(key) ? yRow.QRS
-                : rowWTXY.includes(key) ? yRow.WTXY
-                : key === 'Z' ? yRow.Z
+                : rowWT.includes(key) ? yRow.WT
+                : rowXYZ.includes(key) ? yRow.XYZ
                 : pos.y
               const left = `${renderX * 100}%`
               const top = `${baseY * 100}%`
               const text = Array.isArray(val) ? val.join(', ') : val
-              const isSquareYellow = key === 'Z'
+              const isBoxXYZ = 'XYZ'.includes(key)
               const isSquareRed = key === 'T'
               const isPositive = 'EFGHIJ'.includes(key)
               const isBaseOrXY = 'ABCDXY'.includes(key)
               const isNegative = 'KOLWPMNQRST'.includes(key)
 
-              const bgClass = isSquareYellow
-                ? 'bg-yellow-400/30 border-yellow-300/40'
-                : isSquareRed
+              const bgClass = isSquareRed
                 ? 'bg-rose-500/30 border-rose-400/40'
+                : isBoxXYZ
+                ? 'bg-white/20 border-white/30'
                 : isPositive
                 ? 'bg-green-500/25 border-green-400/40'
                 : isBaseOrXY
@@ -294,7 +275,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
 
               // Only B should be larger; others slightly smaller for clarity
               const sizeClass = key === 'B' ? 'w-14 h-14' : 'w-9 h-9'
-              const shapeClass = isSquareYellow || isSquareRed ? `rounded-md ${sizeClass}` : `rounded-full ${sizeClass}`
+              const shapeClass = (isBoxXYZ || isSquareRed) ? `rounded-md ${sizeClass}` : `rounded-full ${sizeClass}`
 
               return (
                 <div key={key} className="absolute -translate-x-1/2 -translate-y-1/2 text-white/90 font-extrabold drop-shadow flex flex-col items-center" style={{ left, top }}>

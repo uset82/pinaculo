@@ -137,3 +137,22 @@ the pinaculo looks DESIGN
 6. (K O L )SHOULD BE ALIGNED HORIZONTAL 
 7. (P N ) SHOULD BE ALIGNED HORIZONTAL  
 8. ( Q R S ) SHOULD BE ALIGNED HORIZONTAL  
+
+
+
+last fix 
+
+1. (E A K P Q W )Is going to the first vertical line to the left . this line is going to  be a line  VERTICAL AND THEY SHOULD BE ALIGNED  so you must add  "W" in the last position
+
+2. (H G I B O M N R  T ) Is going to SECOND VERTICAL LINE AND ITS GOING TO be main  main long line  VERTICAL AND THEY SHOULD BE ALIGNED  so you must add "T" in the last position >
+
+3. LA PENULTIMA LINEA IS GOING TO ( W T X Y ) SHOULD BE ALIGNED HORIZONTAL 
+
+ TURN X Y Into grex boxes just like Z 
+THE LAST LINE IS GOING TO  THE BOXES  X Y  Z . THEY  SHOULD BE ALIGNED HORIZONTAL 
+
+
+
+
+
+npm run dev 
