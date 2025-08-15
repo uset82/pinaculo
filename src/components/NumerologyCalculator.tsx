@@ -154,9 +154,6 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
             <div>
               <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
               <div className="relative">
-              {!isPreviewMode && !birthDate && (
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">DÍA MES AÑO</span>
-              )}
               <input
                 type="date"
                 id="birthDate"
@@ -171,6 +168,9 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
                 required
                 disabled={isPreviewMode}
               />
+              {!isPreviewMode && !birthDate && (
+                <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-600 text-sm z-10">DÍA MES AÑO</span>
+              )}
               </div>
               <p className="text-sm text-purple-600 mt-1">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
             </div>

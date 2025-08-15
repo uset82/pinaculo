@@ -268,10 +268,6 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               {/* Better birthday input with native date picker + fallback formatting */}
               <label htmlFor="birthDateLg" className="block text-white/80 text-sm mb-1">📅 Fecha de Nacimiento</label>
               <div className="relative">
-                {/* Inline hint inside the box so users know where to click */}
-                {!isPreviewMode && !birthDate && (
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70 text-sm">DÍA MES AÑO</span>
-                )}
                 <input
                   id="birthDateLg"
                   type="date"
@@ -287,6 +283,10 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all"
                   disabled={isPreviewMode}
                 />
+                {/* Inline hint inside the box so users know where to click */}
+                {!isPreviewMode && !birthDate && (
+                  <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-white/80 text-sm z-10">DÍA MES AÑO</span>
+                )}
               </div>
               <p className="text-white/60 text-xs">Formato: DD/MM/YYYY. También puedes abrir el selector de fecha.</p>
               {error && (
