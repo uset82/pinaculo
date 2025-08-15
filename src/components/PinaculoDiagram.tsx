@@ -184,6 +184,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const leftColumn = ['E','A','K','P','Q','W','X']
               const rightColumn = ['F','C','L','S','Z']
               // Keep a short right vertical only for J and D (X/Y should not be forced to D's X to allow W T X Y horizontal row)
+              // Keep the short right vertical column for J and D
               const rightDXColumn = ['J','D']
               const ax = (localPositions as any)['A']?.x ?? pos.x
               const cx = (localPositions as any)['C']?.x ?? pos.x
@@ -233,7 +234,8 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 WT: yWT,
                 XYZ: yXYZ,
               }
-              const rowEIFJ = ['E','I','F','J']
+              // Move J to the same horizontal row as G
+              const rowEIFJ = ['E','I','F']
               const rowABCD = ['A','B','C','D']
               const rowKOL = ['K','O','L']
               const rowM = ['M']
@@ -244,6 +246,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const rowXYZ = ['X','Y','Z']
               let baseY = key === 'H' ? yRow.H
                 : key === 'G' ? yRow.G
+                : key === 'J' ? yRow.G
                 : rowEIFJ.includes(key) ? yRow.EIFJ
                 : rowABCD.includes(key) ? yRow.ABCD
                 : rowKOL.includes(key) ? yRow.KOL
