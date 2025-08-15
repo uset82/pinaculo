@@ -286,7 +286,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <label htmlFor="birthDateLg" className="block text-white/80 text-sm mb-1">📅 Fecha de Nacimiento</label>
               <div className="relative">
                 {useCustomPicker ? (
-                  <div className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white focus-within:border-white/40 focus-within:bg-white/15 transition-all flex gap-3">
+                  <div className="w-full px-4 py-3 bg-white text-black border border-white/20 rounded-xl focus-within:border-white/40 transition-all flex gap-3">
                     <select aria-label="Día" className="flex-1 bg-transparent text-white text-base outline-none appearance-none" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
                       <option value="">DÍA</option>
                       {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (

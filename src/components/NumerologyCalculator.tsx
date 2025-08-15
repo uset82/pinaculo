@@ -170,7 +170,7 @@ export function NumerologyCalculator({ isPreviewMode = false, isDraggableMode = 
               <label htmlFor="birthDate" className="block text-lg font-medium text-purple-900 mb-2">📅 Fecha de Nacimiento</label>
               <div className="relative">
                 {useCustomPicker ? (
-                  <div className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border-2 border-purple-300 rounded-lg text-black focus-within:ring-2 focus-within:ring-purple-500 transition-all flex gap-3">
+                  <div className="w-full px-4 py-3 bg-white text-black border-2 border-purple-300 rounded-lg focus-within:ring-2 focus-within:ring-purple-500 transition-all flex gap-3">
                     <select aria-label="Día" className="flex-1 bg-transparent text-black text-lg outline-none appearance-none" value={day || ''} disabled={isPreviewMode} onChange={(e) => setDay(parseInt(e.target.value) || '')}>
                       <option value="">DÍA</option>
                       {Array.from({ length: 31 }, (_, i) => i + 1).map(n => (
