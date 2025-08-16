@@ -270,26 +270,54 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 <div className="text-white/90 font-bold mb-2">2. Fecha de Nacimiento</div>
               </div>
 
-              {/* Better birthday input with native date picker + fallback formatting */}
+              {/* Better birthday input: native date on iPhone, free-text D/M/Y on desktop */}
               <div className="flex gap-2 items-center">
                 <div className="relative w-full">
-                  <input
-                  type="date"
-                  aria-label="Fecha de nacimiento"
-                  value={isPreviewMode ? toIsoFromDmy(previewData.birthDate) : toIsoFromDmy(birthDate)}
-                  onChange={(e) => {
-                    if (isPreviewMode) return
-                    const iso = e.target.value
-                    setBirthDate(toDmyFromIso(iso))
-                  }}
-                  className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
-                  disabled={isPreviewMode}
-                />
-                  {!isPreviewMode && !birthDate && (
-                    <span className="pointer-events-none absolute z-10 left-4 top-1/2 -translate-y-1/2 text-black text-base font-semibold leading-none">
-                      Día / mes / año
-                    </span>
-                  )}
+                  {(() => {
+                    // Prefer native picker only on iOS devices where UX is great
+                    const isIOS = typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent)
+                    if (isPreviewMode) {
+                      return (
+                        <input
+                          type="date"
+                          aria-label="Fecha de nacimiento"
+                          value={toIsoFromDmy(previewData.birthDate)}
+                          className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold`}
+                          disabled
+                        />
+                      )
+                    }
+                    if (isIOS) {
+                      return (
+                        <input
+                          type="date"
+                          aria-label="Fecha de nacimiento"
+                          value={toIsoFromDmy(birthDate)}
+                          onChange={(e) => setBirthDate(toDmyFromIso(e.target.value))}
+                          className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
+                        />
+                      )
+                    }
+                    // Desktop/laptop: allow direct typing DD/MM/YYYY with light masking
+                    return (
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        aria-label="Fecha de nacimiento (Día/mes/año)"
+                        placeholder="Día / mes / año"
+                        value={birthDate}
+                        onChange={(e) => {
+                          const numbers = e.target.value.replace(/\D/g, '').slice(0, 8)
+                          const dd = numbers.slice(0, 2)
+                          const mm = numbers.slice(2, 4)
+                          const yyyy = numbers.slice(4, 8)
+                          const next = [dd, mm, yyyy].filter(Boolean).join('/')
+                          setBirthDate(next)
+                        }}
+                        className="w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-black placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all text-base font-semibold"
+                      />
+                    )
+                  })()}
                 </div>
               </div>
               {/* Removed helper text per request */}
