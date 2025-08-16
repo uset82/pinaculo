@@ -601,28 +601,28 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                   <h4 className="font-bold text-white/90 text-sm">E. Primera Realización</h4>
                   <span className="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-300 text-sm font-bold">{result.positiveNumbers.E}</span>
                 </div>
-                <p className="text-white/70 text-xs">Edad: 0-27 años - Formación de la personalidad</p>
+                <p className="text-white/70 text-xs">Edad: 0-{Math.max(0, 36 - result.positiveNumbers.D)} años - Formación de la personalidad</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                 <div className="flex items-center justify-between mb-1">
                   <h4 className="font-bold text-white/90 text-sm">F. Segunda Realización</h4>
                   <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-sm font-bold">{result.positiveNumbers.F}</span>
                 </div>
-                <p className="text-white/70 text-xs">Edad: 28-36 años - Desarrollo profesional</p>
+                <p className="text-white/70 text-xs">Edad: {Math.max(0, (36 - result.positiveNumbers.D) + 1)}-{Math.max(0, 45 - result.positiveNumbers.D)} años - Desarrollo profesional</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                 <div className="flex items-center justify-between mb-1">
                   <h4 className="font-bold text-white/90 text-sm">G. Tercera Realización</h4>
                   <span className="px-2 py-0.5 rounded bg-green-500/20 text-green-300 text-sm font-bold">{result.positiveNumbers.G}</span>
                 </div>
-                <p className="text-white/70 text-xs">Edad: 37-45 años - Madurez y consolidación</p>
+                <p className="text-white/70 text-xs">Edad: {Math.max(0, (45 - result.positiveNumbers.D) + 1)}-{Math.max(0, 54 - result.positiveNumbers.D)} años - Madurez y consolidación</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                 <div className="flex items-center justify-between mb-1">
                   <h4 className="font-bold text-white/90 text-sm">H. Destino Final</h4>
                   <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-sm font-bold">{result.positiveNumbers.H}</span>
                 </div>
-                <p className="text-white/70 text-xs">Edad: 46+ años - Propósito de vida</p>
+                <p className="text-white/70 text-xs">Edad: {Math.max(0, (54 - result.positiveNumbers.D) + 1)}-{Math.max(0, 63 - result.positiveNumbers.D)} años - Propósito de vida</p>
               </div>
             </div>
           </div>
