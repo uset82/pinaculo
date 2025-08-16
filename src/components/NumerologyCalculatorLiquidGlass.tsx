@@ -258,7 +258,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 type="text" 
                 value={isPreviewMode ? previewData.name : name}
                 onChange={(e) => !isPreviewMode && setName(e.target.value)}
-                placeholder="Escriba aquí"
+                placeholder="Escriba aqui tu nombre completo"
                 className="w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-black placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all text-base font-semibold"
                 disabled={isPreviewMode}
               />
