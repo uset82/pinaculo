@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
 import dynamic from 'next/dynamic'
-// Load lazily to avoid any SSR/import mismatches
-const PinaculoDiagram = dynamic(() => import('./PinaculoDiagram').then(m => m.default), { ssr: false })
+// Load lazily to avoid any SSR/import mismatches (use default export automatically)
+const PinaculoDiagram = dynamic(() => import('./PinaculoDiagram'), { ssr: false })
 import { PinaculoCalculator } from '@/types/pinaculo'
 
 interface NumerologyCalculatorProps {
