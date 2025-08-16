@@ -220,11 +220,11 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yPN = yM + step
               const yQRS = yPN + step
               // Create a larger gap between QRS and W/T (invisible circle spacing)
-              // Reduce slightly more so W/T sits higher
-              const gapAfterQRS = step * 1.5
+              // Pull W/T further up
+              const gapAfterQRS = step * 1.35
               const yWT = yQRS + gapAfterQRS
               // Bring XYZ higher so their labels stay within the canvas
-              const yXYZ = yWT + step * 0.45
+              const yXYZ = yWT + step * 0.40
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
