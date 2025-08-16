@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
-import PinaculoDiagram from './PinaculoDiagram'
+import dynamic from 'next/dynamic'
+// Load lazily to avoid any SSR/import mismatches
+const PinaculoDiagram = dynamic(() => import('./PinaculoDiagram').then(m => m.default), { ssr: false })
 import { PinaculoCalculator } from '@/types/pinaculo'
 
 interface NumerologyCalculatorProps {
