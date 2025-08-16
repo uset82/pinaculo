@@ -289,13 +289,20 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                     }
                     if (isIOS) {
                       return (
-                        <input
-                          type="date"
-                          aria-label="Fecha de nacimiento"
-                          value={toIsoFromDmy(birthDate)}
-                          onChange={(e) => setBirthDate(toDmyFromIso(e.target.value))}
-                          className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
-                        />
+                        <>
+                          <input
+                            type="date"
+                            aria-label="Fecha de nacimiento"
+                            value={toIsoFromDmy(birthDate)}
+                            onChange={(e) => setBirthDate(toDmyFromIso(e.target.value))}
+                            className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
+                          />
+                          {!birthDate && (
+                            <span className="pointer-events-none absolute z-10 left-4 top-1/2 -translate-y-1/2 text-black text-base font-semibold leading-none">
+                              Día / mes / año
+                            </span>
+                          )}
+                        </>
                       )
                     }
                     // Desktop/laptop: allow direct typing DD/MM/YYYY with light masking
