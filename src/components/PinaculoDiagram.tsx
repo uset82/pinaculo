@@ -169,7 +169,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
         {/* Main Diagram using the principal SVG layout only with numbers */}
         <div className="flex-1 flex justify-center overflow-x-auto">
-          <div className="relative min-w-max w-[700px] h-[680px]">
+          <div className="relative min-w-max w-[700px] h-[720px]">
             {/* Background SVG removed per request so only our rendering is visible */}
             {/* Connections removed per request */}
             {Object.keys(localPositions).map((key) => {
@@ -221,7 +221,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yQRS = yPN + step
               // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
               const yWT = yQRS + step * 1.3
-              const yXYZ = yWT + step * 1.6
+              const yXYZ = yWT + step * 1.9
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
