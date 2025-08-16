@@ -221,7 +221,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yQRS = yPN + step
               // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
               const yWT = yQRS + step * 1.3
-              const yXYZ = yWT + step * 1.4
+              const yXYZ = yWT + step * 1.6
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
