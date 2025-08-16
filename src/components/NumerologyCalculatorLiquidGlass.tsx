@@ -268,9 +268,6 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               {/* 2. Fecha de Nacimiento */}
               <div className="pt-2">
                 <div className="text-white/90 font-bold mb-2">2. Fecha de Nacimiento</div>
-                {typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent) && !birthDate && (
-                  <div className="flex items-center justify-center text-black text-sm mb-2">Día / mes / año</div>
-                )}
               </div>
 
               {/* Better birthday input: native date on iPhone, free-text D/M/Y on desktop */}
@@ -301,7 +298,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                             className={`relative z-0 w-full h-12 px-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl placeholder-white/60 focus:border-white/40 focus:bg-white/15 transition-all appearance-none text-black text-base font-semibold ${!birthDate ? 'date-empty' : ''}`}
                           />
                           {!birthDate && (
-                            <span className="pointer-events-none absolute z-10 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-black text-base font-semibold leading-none text-center whitespace-nowrap">
+                            <span className="pointer-events-none absolute z-10 left-1/2 -translate-x-1/2 top-1/2 -translate-y-[42%] text-black text-base font-semibold leading-none text-center whitespace-nowrap">
                               Día / mes / año
                             </span>
                           )}
