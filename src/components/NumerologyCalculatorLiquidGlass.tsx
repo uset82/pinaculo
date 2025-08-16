@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useClientOnly } from '@/utils/clientOnly'
-import dynamic from 'next/dynamic'
-// Load lazily to avoid any SSR/import mismatches (use default export automatically)
-const PinaculoDiagram = dynamic(() => import('./PinaculoDiagram'), { ssr: false })
+import PinaculoDiagram from './PinaculoDiagram'
 import { PinaculoCalculator } from '@/types/pinaculo'
 
 interface NumerologyCalculatorProps {
@@ -632,7 +630,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
 
         {/* 7. Diagrama del Pináculo */}
         {result && (
-          <div className="liquid-glass-card p-6 hover:scale-105 transition-all duration-300">
+          <div className="liquid-glass-card p-6 hover:scale-105 transition-all duration-300 min-h-[950px]">
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/5 rounded-xl flex items-center justify-center mr-4 backdrop-blur-sm border border-white/20">
                 <span className="text-2xl">🔺</span>
@@ -640,17 +638,12 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <h3 className="text-xl font-bold text-white/90 drop-shadow">7. Diagrama del Pináculo</h3>
             </div>
             <div className="space-y-3">
-              <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                 <PinaculoDiagram 
                 birthDay={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[0])}
                 birthMonth={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[1])}
                 birthYear={parseInt((isPreviewMode ? previewData.birthDate : birthDate).split('/')[2])}
                 name={isPreviewMode ? previewData.name : name}
                 />
-              </div>
-              <div className="text-center mt-3">
-                <p className="text-white/70 text-xs">Representación visual de tu estructura numerológica completa</p>
-              </div>
             </div>
           </div>
         )}
