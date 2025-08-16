@@ -335,7 +335,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               <div className="grid grid-cols-3 gap-2">
                 <div className="text-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
                   <div className="text-2xl font-bold text-pink-300">{result.summary.alma}</div>
-                  <div className="text-xs text-white/70">MI ALMA</div>
+                  <div className="text-xs text-white/70">ALMA</div>
                 </div>
                 <div className="text-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
                   <div className="text-2xl font-bold text-emerald-300">{result.summary.personalidad}</div>
