@@ -268,6 +268,9 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               {/* 2. Fecha de Nacimiento */}
               <div className="pt-2">
                 <div className="text-white/90 font-bold mb-2">2. Fecha de Nacimiento</div>
+                {typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent) && (
+                  <div className="text-black text-sm mb-2">Día / mes / año</div>
+                )}
               </div>
 
               {/* Better birthday input: native date on iPhone, free-text D/M/Y on desktop */}
