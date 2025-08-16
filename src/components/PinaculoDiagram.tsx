@@ -169,7 +169,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
         {/* Main Diagram using the principal SVG layout only with numbers */}
         <div className="flex-1 flex justify-center overflow-x-auto">
-          <div className="relative min-w-max w-[700px] h-[720px]">
+          <div className="relative min-w-max w-[700px] h-[600px]">
             {/* Background SVG removed per request so only our rendering is visible */}
             {/* Connections removed per request */}
             {Object.keys(localPositions).map((key) => {
@@ -211,8 +211,8 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const gy = (localPositions as any)['G']?.y ?? (iy - 0.08)
               const step = Math.abs(iy - gy) || 0.08
               // Slightly larger gaps below I (between EIFJ -> ABCD) and below B (ABCD -> KOL)
-              const gapAfterEIFJ = step * 1.2
-              const gapAfterABCD = step * 1.28
+              const gapAfterEIFJ = step * 1.18
+              const gapAfterABCD = step * 1.22
               const yEIFJ = iy
               const yABCD = yEIFJ + gapAfterEIFJ
               const yKOL = yABCD + gapAfterABCD
@@ -220,8 +220,8 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yPN = yM + step
               const yQRS = yPN + step
               // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
-              const yWT = yQRS + step * 1.3
-              const yXYZ = yWT + step * 1.9
+              const yWT = yQRS + step
+              const yXYZ = yWT + step
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
@@ -278,15 +278,15 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
                 : 'bg-white/10 border-white/30'
 
               // Only B should be larger; others slightly smaller for clarity
-              const sizeClass = key === 'B' ? 'w-16 h-16' : 'w-12 h-12'
+              const sizeClass = key === 'B' ? 'w-14 h-14' : 'w-9 h-9'
               const shapeClass = (isBoxXYZ || isSquareRed) ? `rounded-md ${sizeClass}` : `rounded-full ${sizeClass}`
 
               return (
                 <div key={key} className="absolute -translate-x-1/2 -translate-y-1/2 text-white/90 font-extrabold drop-shadow flex flex-col items-center" style={{ left, top }}>
                   <div className={`flex items-center justify-center border ${bgClass} ${shapeClass}`}>
-                    <span className={key === 'B' ? 'text-[20px] leading-tight' : 'text-[16px] leading-tight'}>{text}</span>
+                    <span className={key === 'B' ? 'text-[18px] leading-none' : 'text-[14px] leading-none'}>{text}</span>
                   </div>
-                  <div className="mt-2 text-[12px] uppercase tracking-wide text-white/70 text-center">{key}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
                 </div>
               )
             })}
