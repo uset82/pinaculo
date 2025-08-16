@@ -220,11 +220,11 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yPN = yM + step
               const yQRS = yPN + step
               // Create a larger gap between QRS and W/T (invisible circle spacing)
-              // Slightly reduced so W/T sits a bit higher
-              const gapAfterQRS = step * 1.6
+              // Reduce slightly more so W/T sits higher
+              const gapAfterQRS = step * 1.5
               const yWT = yQRS + gapAfterQRS
-              // Bring XYZ a bit higher so their labels are visible
-              const yXYZ = yWT + step * 0.6
+              // Bring XYZ higher so their labels stay within the canvas
+              const yXYZ = yWT + step * 0.45
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
@@ -286,10 +286,15 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
 
               return (
                 <div key={key} className="absolute -translate-x-1/2 -translate-y-1/2 text-white/90 font-extrabold drop-shadow flex flex-col items-center" style={{ left, top }}>
-                  <div className={`flex items-center justify-center border ${bgClass} ${shapeClass}`}>
+                  <div className={`relative flex items-center justify-center border ${bgClass} ${shapeClass}`}>
                     <span className={key === 'B' ? 'text-[18px] leading-none' : 'text-[14px] leading-none'}>{text}</span>
+                    {isBoxXYZ && (
+                      <span className="absolute bottom-0.5 text-[10px] uppercase tracking-wide text-white/70">{key}</span>
+                    )}
                   </div>
-                  <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
+                  {!isBoxXYZ && (
+                    <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
+                  )}
                 </div>
               )
             })}
