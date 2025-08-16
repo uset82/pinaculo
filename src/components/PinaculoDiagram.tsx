@@ -219,8 +219,9 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yM = yKOL + step
               const yPN = yM + step
               const yQRS = yPN + step
-              // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
-              const yWT = yQRS + step
+              // Create a larger gap between QRS and W/T (invisible circle spacing)
+              const gapAfterQRS = step * 1.75
+              const yWT = yQRS + gapAfterQRS
               const yXYZ = yWT + step
               const yRow = {
                 H: Math.max(0, gy - step),
