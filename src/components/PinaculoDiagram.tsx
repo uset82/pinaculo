@@ -169,7 +169,7 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
       <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
         {/* Main Diagram using the principal SVG layout only with numbers */}
         <div className="flex-1 flex justify-center overflow-x-auto">
-          <div className="relative min-w-max w-[700px] h-[720px]">
+          <div className="relative min-w-max w-[700px] h-[600px]">
             {/* Background SVG removed per request so only our rendering is visible */}
             {/* Connections removed per request */}
             {Object.keys(localPositions).map((key) => {
@@ -219,12 +219,9 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
               const yM = yKOL + step
               const yPN = yM + step
               const yQRS = yPN + step
-              // Create a larger gap between QRS and W/T (invisible circle spacing)
-              // Pull W/T further up
-              const gapAfterQRS = step * 1.35
-              const yWT = yQRS + gapAfterQRS
-              // Bring XYZ higher so their labels stay within the canvas
-              const yXYZ = yWT + step * 0.40
+              // Place W and T on a row just below QRS, and X/Y/Z as the last row (horizontal)
+              const yWT = yQRS + step
+              const yXYZ = yWT + step
               const yRow = {
                 H: Math.max(0, gy - step),
                 G: gy,
@@ -286,15 +283,10 @@ function PinaculoDiagram({ birthDay, birthMonth, birthYear, name }: PinaculoDiag
 
               return (
                 <div key={key} className="absolute -translate-x-1/2 -translate-y-1/2 text-white/90 font-extrabold drop-shadow flex flex-col items-center" style={{ left, top }}>
-                  <div className={`relative flex items-center justify-center border ${bgClass} ${shapeClass}`}>
+                  <div className={`flex items-center justify-center border ${bgClass} ${shapeClass}`}>
                     <span className={key === 'B' ? 'text-[18px] leading-none' : 'text-[14px] leading-none'}>{text}</span>
-                    {isBoxXYZ && (
-                      <span className="absolute bottom-0.5 text-[10px] uppercase tracking-wide text-white/70">{key}</span>
-                    )}
                   </div>
-                  {!isBoxXYZ && (
-                    <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
-                  )}
+                  <div className="mt-1 text-[10px] uppercase tracking-wide text-white/70 text-center">{key}</div>
                 </div>
               )
             })}
