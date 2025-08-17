@@ -19,17 +19,28 @@ type UIReport = {
   interpretations?: Record<string, string>;
 }
 
-const chaldeanMap: Record<string, number> = {
-  'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
-  'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
-  'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8
+// Mapa Pitagórico solicitado en nombre.md
+// A=J=S=1, B=T=2, C=L=U=3, D=M=4, E=N=Ñ=W=5, F=O=X=6, G=P=Y=7, H=Q=Z=8, I=R=9, K=11, V=22
+const pythagoreanMap: Record<string, number> = {
+  'A': 1, 'J': 1, 'S': 1,
+  'B': 2, 'T': 2,
+  'C': 3, 'L': 3, 'U': 3,
+  'D': 4, 'M': 4,
+  'E': 5, 'N': 5, 'W': 5, // Ñ -> se normaliza a N
+  'F': 6, 'O': 6, 'X': 6,
+  'G': 7, 'P': 7, 'Y': 7,
+  'H': 8, 'Q': 8, 'Z': 8,
+  'I': 9, 'R': 9,
+  'K': 11,
+  'V': 22
 }
 
 const reducePreservingMasters = (num: number): number => {
-  if (num === 11 || num === 22 || num === 33) return num
+  // Solo preservar 11 y 22 como números maestros
+  if (num === 11 || num === 22) return num
   while (num > 9) {
     num = num.toString().split('').reduce((s, d) => s + parseInt(d), 0)
-    if (num === 11 || num === 22 || num === 33) return num
+    if (num === 11 || num === 22) return num
   }
   return num
 }
@@ -38,7 +49,7 @@ const calcNameTotal = (name: string): number => {
   const clean = name
     .normalize('NFD').replace(/\p{Diacritic}/gu, '')
     .replace(/ñ/gi, 'n').toUpperCase().replace(/[^A-Z]/g, '')
-  const sum = clean.split('').reduce((s, c) => s + (chaldeanMap[c] || 0), 0)
+  const sum = clean.split('').reduce((s, c) => s + (pythagoreanMap[c] || 0), 0)
   return reducePreservingMasters(sum)
 }
 
@@ -47,7 +58,7 @@ const calcAlma = (name: string): number => {
     .normalize('NFD').replace(/\p{Diacritic}/gu, '')
     .replace(/ñ/gi, 'n').toUpperCase().replace(/[^A-Z]/g, '')
   const vowels = clean.split('').filter(c => 'AEIOU'.includes(c))
-  const sum = vowels.reduce((s, c) => s + (chaldeanMap[c] || 0), 0)
+  const sum = vowels.reduce((s, c) => s + (pythagoreanMap[c] || 0), 0)
   return reducePreservingMasters(sum)
 }
 
@@ -56,7 +67,7 @@ const calcPersonalidad = (name: string): number => {
     .normalize('NFD').replace(/\p{Diacritic}/gu, '')
     .replace(/ñ/gi, 'n').toUpperCase().replace(/[^A-Z]/g, '')
   const consonants = clean.split('').filter(c => /[A-Z]/.test(c) && !'AEIOU'.includes(c))
-  const sum = consonants.reduce((s, c) => s + (chaldeanMap[c] || 0), 0)
+  const sum = consonants.reduce((s, c) => s + (pythagoreanMap[c] || 0), 0)
   return reducePreservingMasters(sum)
 }
 
