@@ -726,7 +726,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
               </div>
               
               {/* Agregar otros aspectos si están disponibles */}
-              {result.W && (
+              {typeof result.W !== 'undefined' && (
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">W. Triplicidad</h4>
@@ -735,7 +735,7 @@ export function NumerologyCalculatorLiquidGlass({ isPreviewMode = false }: Numer
                 </div>
               )}
               
-              {result.T && (
+              {typeof result.T !== 'undefined' && (
                 <div className="p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-white/90 text-sm">T. Números Ausentes</h4>

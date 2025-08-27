@@ -301,7 +301,12 @@ export class PinaculoCalculator {
 
     // Calculate T (absent numbers)
     const absent = this.calculateAbsentNumbers(results);
-    results.T = absent.length === 1 ? absent[0] : absent;
+    // If there are no absent numbers (all 1..9 present), T must be 0
+    if (absent.length === 0) {
+      results.T = 0;
+    } else {
+      results.T = absent.length === 1 ? absent[0] : absent;
+    }
 
     return results;
   }
